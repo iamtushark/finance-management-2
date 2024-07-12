@@ -19,8 +19,8 @@ export interface DBTransactions {
 
 export interface Budget {
   [category: string]: {
-    amount_set: number;
-    amount_spent: number;
+    amountSet: number;
+    amountSpent: number;
   };
 }
 
