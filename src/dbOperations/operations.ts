@@ -7,7 +7,7 @@ import {
   Budget,
   DBBudgets,
 } from "./interfaces";
-import { DBKeys } from "./config";
+import { DBKeys, localStorageKeys } from "./config";
 
 localforage.config({
   driver: localforage.INDEXEDDB,
@@ -45,6 +45,22 @@ export const addUser = async (
 export const getUser = async (userId: string): Promise<User | null> => {
   const users = await localforage.getItem<DBUsers>(DBKeys.users);
   return users ? users[userId] : null;
+};
+
+export const logUser = async (
+  userId: string,
+  password: string,
+): Promise<boolean> => {
+  const users = await localforage.getItem<DBUsers>(DBKeys.users);
+
+  if (users && users[userId]) {
+    const user = users[userId];
+    if (user.password === password) {
+      localStorage.setItem(localStorageKeys.user, userId);
+      return true;
+    }
+  }
+  return false;
 };
 
 // Transaction Operations
