@@ -1,8 +1,8 @@
+// key config for indexedDB and localstorage
 export enum DBKeys {
   transactions = "transactions",
   users = "users",
-  budget = "budget",
-  ratings = "ratings",
+  budgets = "budgets",
 }
 
 export enum localStorageKeys {
