@@ -33,7 +33,7 @@ const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const navigateAfterLogin = useNavigateAfterLogin()
+  const navigateAfterLogin = useNavigateAfterLogin();
 
   const onSubmit = async (data: LoginFormInterface) => {
     try {

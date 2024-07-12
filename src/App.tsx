@@ -6,8 +6,8 @@ import RouteManager from "./Routes/RouteManager";
 const App = () => {
   return (
     <>
-    <RouteManager/>
-    <ToastContainer/>
+      <RouteManager />
+      <ToastContainer />
     </>
   );
 };
