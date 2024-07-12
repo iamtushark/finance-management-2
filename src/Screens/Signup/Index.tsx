@@ -22,7 +22,7 @@ import { addUser } from "../../dbOperations/operations";
 import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
 
-const SignUp: React.FC = () => {
+const SignupPage: React.FC = () => {
   const navigate = useNavigate();
   const {
     control,
@@ -114,4 +114,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SignupPage;
