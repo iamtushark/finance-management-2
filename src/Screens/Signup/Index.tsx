@@ -34,7 +34,7 @@ const SignupPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const navigateAfterLogin = useNavigateAfterLogin()
+  const navigateAfterLogin = useNavigateAfterLogin();
 
   const onSubmit = async (data: RegisterForm) => {
     try {
@@ -45,8 +45,7 @@ const SignupPage: React.FC = () => {
       }
       localStorage.setItem(localStorageKeys.user, data.username);
       dispatch(loginUser({ userId: data.username, password: data.password }));
-      navigateAfterLogin()
-      
+      navigateAfterLogin();
     } catch (err: any) {
       // Handle error
     }

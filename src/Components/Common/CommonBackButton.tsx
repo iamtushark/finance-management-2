@@ -11,7 +11,8 @@ const BackButton: React.FC = () => {
   };
 
   return (
-    <IconButton sx={{ml:1}}
+    <IconButton
+      sx={{ ml: 1 }}
       edge="start"
       color="inherit"
       aria-label="back"
