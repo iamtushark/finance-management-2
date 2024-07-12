@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const useNavigateAfterLogin = () => {
   const location = useLocation();
@@ -6,12 +6,12 @@ const useNavigateAfterLogin = () => {
 
   const navigateToQueryOrRoot = () => {
     const params = new URLSearchParams(location.search);
-    const next = params.get('next');
+    const next = params.get("next");
 
     if (next) {
       navigate(next);
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
