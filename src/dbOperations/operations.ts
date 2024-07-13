@@ -98,8 +98,8 @@ export const getTransactions = async (
 export const setCategoryBudget = async (
   userId: string,
   category: string,
-  amount_set: number,
-  amount_spent: number,
+  amountSet: number,
+  amountSpent: number,
 ): Promise<void> => {
   let budgets = await localforage.getItem<DBBudgets>(DBKeys.budgets);
 
@@ -113,8 +113,8 @@ export const setCategoryBudget = async (
   }
 
   budgets[userId][category] = {
-    amount_set: amount_set,
-    amount_spent: amount_spent,
+    amountSet: amountSet,
+    amountSpent: amountSpent,
   };
   await localforage.setItem(DBKeys.budgets, budgets);
 };
