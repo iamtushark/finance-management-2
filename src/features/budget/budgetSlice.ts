@@ -7,6 +7,7 @@ import { expensesCategory } from "../../Constants/categories";
 
 // for the db operations
 import { setCategoryBudget as setDbCategoryBudget } from "../../dbOperations/operations";
+import { setWholeBudget } from "../../dbOperations/operations";
 
 export interface budgetSliceState {
   status: "idle" | "loading" | "succeeded" | "failed";
