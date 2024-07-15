@@ -31,9 +31,37 @@ export const budgetSlice = createAppSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: create => ({
-    setBudget: create.reducer((state, action: PayloadAction<Budget>) => {
-      state.budget = action.payload;
-    }),
+
+    // setting the whole budget object
+    setBudget: create.asyncThunk(
+      async ({
+        userId,
+        budget,
+      }: {
+        userId: string;
+        budget: Budget;
+      }) => {
+        await setWholeBudget(userId, budget);
+        return { budget };
+      },
+      {
+        pending: state => {
+          state.status = "loading";
+        },
+        fulfilled: (
+          state,
+          action: PayloadAction<{
+            budget: Budget;
+          }>,
+        ) => {
+          state.budget = action.payload.budget;
+          state.status = "succeeded";
+        },
+        rejected: state => {
+          state.status = "failed";
+        },
+      },
+    ),
 
     //
     setCategoryBudget: create.asyncThunk(
