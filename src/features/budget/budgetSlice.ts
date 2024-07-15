@@ -32,7 +32,6 @@ export const budgetSlice = createAppSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: create => ({
-
     // setting the whole budget object
     setBudget: create.asyncThunk(
       async ({
