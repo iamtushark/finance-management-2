@@ -35,7 +35,7 @@ export const budgetSlice = createAppSlice({
       state.budget = action.payload;
     }),
 
-    // 
+    //
     setCategoryBudget: create.asyncThunk(
       async ({
         userId,
@@ -64,7 +64,10 @@ export const budgetSlice = createAppSlice({
           }>,
         ) => {
           const { userId, category, amountSet, amountSpent } = action.payload;
-          state.budget[category] = {amountSet : amountSet, amountSpent : amountSpent}
+          state.budget[category] = {
+            amountSet: amountSet,
+            amountSpent: amountSpent,
+          };
           state.status = "succeeded";
         },
         rejected: state => {
