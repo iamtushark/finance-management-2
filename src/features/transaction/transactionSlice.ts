@@ -15,7 +15,7 @@ interface TransactionSliceState {
 const initialState: TransactionSliceState = {
   transactions: [
     {
-      type: 'Expense',
+      type: "Expense",
       amount: 458,
       date: new Date(),
     },
