@@ -6,7 +6,6 @@ interface ExpensesCategory {
 }
 
 export const expensesCategory: ExpensesCategory = {
-  "": { name: "Select", emoji: " " },
   education: { name: "Education", emoji: "📚" },
   entertainment: { name: "Entertainment", emoji: "🍿" },
   bills: { name: "Bills", emoji: "🧾" },
