@@ -34,13 +34,7 @@ export const budgetSlice = createAppSlice({
   reducers: create => ({
     // setting the whole budget object
     setBudget: create.asyncThunk(
-      async ({
-        userId,
-        budget,
-      }: {
-        userId: string;
-        budget: Budget;
-      }) => {
+      async ({ userId, budget }: { userId: string; budget: Budget }) => {
         await setWholeBudget(userId, budget);
         return { budget };
       },
