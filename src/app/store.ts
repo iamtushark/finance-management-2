@@ -22,6 +22,7 @@ export const makeStore = (preloadedState?: Partial<RootState>) => {
     // and other useful features of `rtk-query`.
     middleware: getDefaultMiddleware => {
       return getDefaultMiddleware();
+      return getDefaultMiddleware();
     },
     preloadedState,
   });
