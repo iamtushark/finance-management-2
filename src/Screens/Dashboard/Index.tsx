@@ -6,7 +6,6 @@ import SavingsIcon from '@mui/icons-material/Savings';
 import { AccountBalance } from '@mui/icons-material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import CommonHeadingTypography from '../../Components/Common/CommonHeadingTypography';
 
 const data = [
   { value: 10, label: 'series A' },
@@ -17,12 +16,10 @@ const data = [
 const Dashboard: React.FC = () => {
   return (
     <div>
-      <Container sx={{ mt: 4, bgcolor: "white", border: '1px solid #ccc', borderRadius: '8px', padding: '16px' }}>
-        <CommonHeadingTypography>
-          Overview
-        </CommonHeadingTypography>
+      <Container sx={{ bgcolor: "white", border: '1px ', borderRadius: '16px', padding: '12px' }}>
+        <h1>Overview</h1>
         <h3>Summary</h3>
-        <Grid container spacing={2} justifyContent="center"> {/* Adjusted justifyContent */}
+        <Grid container spacing={4} justifyContent="center" width={"100%"}>
           {/* Summary Cards */}
           <Grid item xs={12} sm={6} md={3}>
             <SummaryCard
@@ -50,15 +47,31 @@ const Dashboard: React.FC = () => {
         <h3>Reports</h3>
 
         {/* Pie Charts */}
-        <Grid container spacing={2} justifyContent="center"> {/* Adjusted justifyContent */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <PieChart type="income" data={data} />
+        <Grid container spacing={4} justifyContent="center">
+          <Grid item xs={12} sm={6} md={6}>
+            <Box sx={{
+              border: '2px solid #ccc',
+              borderRadius: '16px',
+              padding: '24px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
+              <h3>Expenses</h3>
+              <PieChart type="expense" data={data} />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <PieChart type="expense" data={data} />
+          <Grid item xs={12} sm={6} md={6}>
+            <Box sx={{
+              border: '2px solid #ccc',
+              borderRadius: '16px',
+              padding: '24px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
+              <h3>Income</h3>
+              <PieChart type="income" data={data} />
             </Box>
           </Grid>
         </Grid>
