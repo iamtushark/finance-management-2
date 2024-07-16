@@ -3,6 +3,8 @@ import { Container, Grid, Box } from '@mui/material';
 import PieChart from '../../Components/PieChart';
 import SummaryCard from '../../Components/SummaryCard';
 import { AccountBalance } from '@mui/icons-material';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+
 
 const data = [
   { value: 10, label: 'series A' },
@@ -17,7 +19,7 @@ const Dashboard: React.FC = () => {
         {/* Summary Cards */}
         <Grid item xs={12} sm={6} md={4}>
           <SummaryCard 
-            title="Budget" 
+            title="Income" 
             value="$1,234" 
             icon={<AccountBalance sx={{ fontSize: 30, color: 'primary.main' }} />} 
           />
@@ -31,13 +33,21 @@ const Dashboard: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <SummaryCard 
-            title="Income" 
-            value="$5,678" 
+            title="Budget" 
+            value="$5,618" 
             icon={<AccountBalance sx={{ fontSize: 30, color: 'success.main' }} />} 
           />
         </Grid>
-
+        <Grid item xs={12} sm={6} md={4}>
+          <SummaryCard 
+            title="Available Balance" 
+            value="$5,228" 
+            icon={<AccountBalance sx={{ fontSize: 30, color: 'success.main' }} />} 
+          />
+        </Grid>
+</Grid>
         {/* Pie Charts */}
+        <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={4}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <PieChart type="income" data={data} />
