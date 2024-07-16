@@ -5,7 +5,8 @@ Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Test
 ```sh
 npx degit reduxjs/redux-templates/packages/vite-template-redux my-app
 ```
-
+##
+<!-- fixing branches -->
 ## Goals
 
 - Easy migration from Create React App or Vite
