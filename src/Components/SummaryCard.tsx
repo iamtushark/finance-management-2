@@ -9,15 +9,15 @@ interface SummaryCardProps {
 
 const SummaryCard: React.FC<SummaryCardProps> = ({ title, value, icon }) => {
   return (
-    <Card sx={{ width: 200, mx: 'auto', my: 1, p: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-      <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 1 }}>
-        <Box sx={{ mb: 1 }}>
+    <Card sx={{ width: 180, mx: 'auto', my: 1, p: 0.5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+      <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 0.5 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
           {icon}
+          <Typography variant="subtitle2" component="div" sx={{ ml: 1 }}>
+            {title}
+          </Typography>
         </Box>
-        <Typography variant="subtitle2" component="div" sx={{ mb: 0.5 }}>
-          {title}
-        </Typography>
-        <Typography variant="h6" component="div">
+        <Typography variant="h5" component="div" sx={{ mt: 0.5 }}>
           {value}
         </Typography>
       </CardContent>
