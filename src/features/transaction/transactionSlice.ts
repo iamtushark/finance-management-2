@@ -13,7 +13,13 @@ interface TransactionSliceState {
 }
 
 const initialState: TransactionSliceState = {
-  transactions: [],
+  transactions: [
+    {
+      type: 'Expense',
+      amount: 458,
+      date: new Date(),
+    },
+  ],
   status: "idle",
 };
 
