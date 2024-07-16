@@ -9,10 +9,8 @@ const RouteManager: React.FC = () => {
 
   return (
     <>
-      <BrowserRouter>
         <PublicRoutes />
         {isAuthenticated && <PrivateRoutes />}
-      </BrowserRouter>
     </>
   );
 };
