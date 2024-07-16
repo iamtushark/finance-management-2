@@ -10,27 +10,51 @@ import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded
 import SavingsRoundedIcon from '@mui/icons-material/SavingsRounded';
 import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded';
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-export default function MiniDrawer() {
-  const containerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100vh',
-    width: '60px',
-    backgroundColor: '#111827',
-    color: '#ffffff',
-  };
+const containerStyle = {
+  display: 'flex',
+  flexDirection: 'column' as 'column',
+  justifyContent: 'space-between',
+  height: '100vh',
+  width: '60px',
+  backgroundColor: '#111827',
+  color: '#ffffff',
+};
 
-  const headerStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '8px',
-    backgroundColor: '#111827',
-    color: '#ffffff',
+const headerStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '8px',
+  backgroundColor: '#111827',
+  color: '#ffffff',
+  cursor: 'pointer',
+};
+
+const listItemButtonStyle = {
+  margin: '8px 0',
+};
+
+const iconStyle = {
+  color: '#ffffff',
+  fontSize: '36px',
+  border: '2px solid #ffffff',
+  borderRadius: '50%',
+  padding: '4px',
+};
+
+const dividerStyle = {
+  width: '100%',
+  height: '2px',
+  backgroundColor: '#ffffff',
+  margin: '8px 0',
+};
+
+export default function MiniDrawer() {
+  const handleHomeClick = () => {
+    window.location.href = '/home';
   };
 
   return (
@@ -84,12 +108,12 @@ export default function MiniDrawer() {
       </List>
       <List>
         <ListItem disablePadding>
-          <Tooltip title="Help" placement="right" arrow>
-            <ListItemButton>
+          <Tooltip title="Profile" placement="right" arrow>
+            <ListItemButton style={listItemButtonStyle}>
               <ListItemIcon>
-                <HelpOutlineIcon style={{ color: '#ffffff' }} />
+                <AccountBoxIcon style={{ color: '#ffffff' }} />
               </ListItemIcon>
-              <ListItemText primary="Help" style={{ display: 'none' }} />
+              <ListItemText primary="Profile" style={{ display: 'none' }} />
             </ListItemButton>
           </Tooltip>
         </ListItem>
