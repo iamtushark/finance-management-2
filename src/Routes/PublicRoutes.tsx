@@ -48,6 +48,7 @@ const PublicRoutes: React.FC = () => {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/transactions" element={<Subscriptions />} />
     </Routes>
   );
 };
