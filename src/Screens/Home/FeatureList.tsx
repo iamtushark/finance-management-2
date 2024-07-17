@@ -36,7 +36,7 @@ const FeatureList: React.FC = () => (
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     padding: '2rem',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#ffffff',
   },
   title: {
     textAlign: 'center',
@@ -48,10 +48,14 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   list: {
     listStyle: 'none',
-    padding: 0,
+    display: 'flex',
+    alignItems: 'center',
+    margin: '0 0.5rem',
+    padding: '0 0.5rem',
   },
   listItem: {
     margin: '1.5rem 0',
+    padding: '1.5rem',
   },
   featureTitle: {
     fontSize: '1.5rem',
