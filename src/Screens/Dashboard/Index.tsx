@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, Stack, Button } from '@mui/material';
+import { Container, Grid, Stack, Button, Typography, Paper } from '@mui/material';
 import PieChart from '../../Components/PieChart';
 import SummaryCard from '../../Components/SummaryCard';
 import SavingsIcon from '@mui/icons-material/Savings';
@@ -56,47 +56,88 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <MiniDrawer />
-      <Container sx={{ bgcolor: "white", border: '1px ', borderRadius: '16px', padding: '12px' }}>
-        <h1>Overview</h1>
+      {/* <Container sx={{ bgcolor: "white", border: '1px ', borderRadius: '16px', padding: '12px' }}> */}
+          <div style={
+            { backgroundColor: "#f1f1f1f1",
+              marginBottom:'4rem',
+              minWidth:'100%', 
+              maxWidth:'100%', 
+              overflow:'hidden', 
+              maxHeight:'5rem'
+
+            }}>
+            <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ minWidth:'100%', maxWidth:'100%'}}>
+
+              <Grid item xs={10} sm={6} md={2}>
+                <Typography variant="h1" align="left" sx={{ margin:'2.25rem', fontSize: '2.5rem', fontWeight: 'bold' }}>
+                  Overview
+                </Typography>   
+              </Grid>   
+
+              <Grid item xs={10} sm={6} md={2}>
+              </Grid> 
+
+              <LocalizationProvider dateAdapter={AdapterDayjs} >
+                <Grid item xs={10} sm={6} md={3}>
+                  <DatePicker
+                    label="Start Date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                    sx={{ width: '100%', height: '5.3rem', fontSize: '0.52rem' }}
+                  />
+                </Grid>
+                <Grid item xs={10} sm={6} md={3}>
+                  <DatePicker
+                    label="End Date"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                    sx={{ width: '100%', height: '5.3rem', fontSize: '0.25rem'}}
+                  />
+                </Grid>
+              </LocalizationProvider>
+
+              <Grid item xs={10} sm={6} md={2} display="flex" alignItems="center" >
+                <Button 
+                  variant="contained" 
+                  onClick={handleSave}
+                  sx={{
+                    backgroundColor: 'primary.main',
+                    height:50,
+                    fontSize:'0.9rem', 
+                    fontWeight:'600',
+                    maxWidth:350,
+                    borderRadius:'50px',
+                    marginLeft:'1rem',
+                    color: 'white',
+                      '&:hover': {
+                        backgroundColor: 'primary.dark',
+                      },
+                  }}>Save</Button>
+              </Grid>
+
+            </Grid>
+          </div>
+
         <Grid container spacing={4} justifyContent="center">
-          <LocalizationProvider dateAdapter={AdapterDayjs} >
-            <Grid item xs={12} sm={6} md={3}>
-              <DatePicker
-                label="Start Date"
-                value={startDate}
-                onChange={handleStartDateChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <DatePicker
-                label="End Date"
-                value={endDate}
-                onChange={handleEndDateChange}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-              <Button variant="contained" onClick={handleSave}>Save</Button>
-            </Grid>
-          </LocalizationProvider>
         </Grid>
-        <h3>Summary</h3>
-        <Grid container spacing={4} justifyContent="center" width={"100%"}>
+
+        <Grid container spacing={4} justifyContent="center" maxWidth={"100%"}>
           {/* Summary Cards */}
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={10} sm={6} md={3}>
             <SummaryCard
               title="Total Income"
               value={String(filteredIncomeSum)}
               icon={<AttachMoneyIcon sx={{ fontSize: 30, color: 'primary.main' }} />}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={10} sm={6} md={3}>
             <SummaryCard
               title="Total Spent"
               value={String(filteredExpenseSum)}
               icon={<SavingsIcon sx={{ fontSize: 30, color: 'success.main' }} />}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={10} sm={6} md={3}>
             <SummaryCard
               title="Available Balance"
               value={String(filteredIncomeSum - filteredExpenseSum)}
@@ -105,38 +146,54 @@ const Dashboard: React.FC = () => {
           </Grid>
         </Grid>
 
-        <h3>Reports</h3>
-
         {/* Pie Charts */}
-        <Grid container spacing={4} justifyContent="center">
-          <Grid item xs={12} sm={6} md={6}>
+        <Grid container spacing={4} justifyContent="center" sx={{m:'4px', maxWidth: '100%'}}>
+          <Grid item xs={10} sm={6} md={5}>
             <Stack sx={{
-              border: '2px solid #ccc',
-              borderRadius: '16px',
-              padding: '24px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
+              width: '85%', 
+              mx: 'auto', 
+              my: 1, 
+              p: 2, 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              textAlign: 'center', 
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+              borderRadius: '8px', 
+              backgroundColor: 'rgba(255, 255, 255, 0.3)', 
+              backdropFilter: 'blur(10px)'
+              // border: '2px solid #ccc',
+              // borderRadius: '16px',
+              // padding: '24px',
+              // display: 'flex',
+              // flexDirection: 'column',
+              // alignItems: 'center'
             }}>
               <h3>Expenses</h3>
               <PieChart type="expense" data={groupAndSumByCategory(filteredExpenseArray)} />
             </Stack>
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={10} sm={6} md={5}>
             <Stack sx={{
-              border: '2px solid #ccc',
-              borderRadius: '16px',
-              padding: '24px',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
+              width: '85%', 
+              mx: 'auto', 
+              my: 1, 
+              p: 2, 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              textAlign: 'center', 
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+              borderRadius: '8px', 
+              backgroundColor: 'rgba(255, 255, 255, 0.3)', 
+              backdropFilter: 'blur(10px)'
             }}>
               <h3>Income</h3>
               <PieChart type="income" data={groupAndSumByCategory(filteredIncomeArray)} />
             </Stack>
           </Grid>
         </Grid>
-      </Container>
+      {/* </Container> */}
     </div>
   );
 };

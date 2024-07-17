@@ -1,11 +1,11 @@
 import React from "react";
-import Box, { BoxProps } from "@mui/material/Box";
+import Stack, { StackProps } from "@mui/material/Stack";
 
-interface CommonBoxProps extends BoxProps {}
+interface CommonBoxProps extends StackProps {}
 
 const CommonBox: React.FC<CommonBoxProps> = ({ children, ...props }) => {
   return (
-    <Box
+    <Stack
       {...props}
       padding={2}
       sx={{
@@ -19,7 +19,7 @@ const CommonBox: React.FC<CommonBoxProps> = ({ children, ...props }) => {
       }}
     >
       {children}
-    </Box>
+    </Stack>
   );
 };
 
