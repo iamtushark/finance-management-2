@@ -11,7 +11,7 @@ const useNavigateAfterLogin = () => {
     if (next) {
       navigate(next);
     } else {
-      navigate("/");
+      navigate("/dashboard");
     }
   };
 

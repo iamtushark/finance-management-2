@@ -10,13 +10,13 @@ import { PieChart } from "@mui/x-charts";
 const expenseGraphColors = [
   "#FF0000", // Red
   "#FF6347", // Tomato
-  "#FF4500", // Orange Red
   "#FFD700", // Gold
   "#FFA500", // Orange
   "#FF8C00", // Dark Orange
   "#B22222", // Firebrick
   "#DC143C", // Crimson
   "#8B0000", // Dark Red
+  "#FF4500", // Orange Red
   "#FF1493", // Deep Pink
   "#FF69B4", // Hot Pink
   "#DB7093", // Pale Violet Red

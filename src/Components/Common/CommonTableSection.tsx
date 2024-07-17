@@ -26,7 +26,7 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({transactions}) =
             transactions.length>0 ? (
               transactions.map( (trxn) => (
                 <TableRow>
-                  <TableCell>{trxn.type}</TableCell>
+                  <TableCell>{trxn.category}</TableCell>
                   <TableCell>{trxn.amount}</TableCell>
                   <TableCell>{trxn.date.toDateString()}</TableCell>
                 </TableRow>

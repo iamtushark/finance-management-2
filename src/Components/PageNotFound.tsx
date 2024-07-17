@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Box, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button } from "@mui/material";
 
 const NotFoundPage: React.FC = () => {
   const location = useLocation();
@@ -9,7 +9,7 @@ const NotFoundPage: React.FC = () => {
     location.pathname.startsWith("/budget");
 
   return (
-    <Box
+    <Stack
       display="flex"
       flexDirection="column"
       justifyContent="center"
@@ -35,7 +35,7 @@ const NotFoundPage: React.FC = () => {
       >
         {isPrivateRoute ? "Go to Login" : "Go to Home"}
       </Button>
-    </Box>
+    </Stack>
   );
 };
 

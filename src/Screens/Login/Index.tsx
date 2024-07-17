@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import CardActions from "@mui/material/CardActions";
@@ -22,7 +21,6 @@ import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
 
 const LoginPage: React.FC = () => {
-  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -31,7 +29,6 @@ const LoginPage: React.FC = () => {
     resolver: yupResolver(LoginFormSchema),
   });
   const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigateAfterLogin = useNavigateAfterLogin();
 
@@ -78,7 +75,7 @@ const LoginPage: React.FC = () => {
                 <Grid item xs={12}>
                   <CardActions>
                     <CommonBlackSubmitButton
-                      loading={isLoading}
+                      loading={false}
                       text="Log In"
                     />
                   </CardActions>
