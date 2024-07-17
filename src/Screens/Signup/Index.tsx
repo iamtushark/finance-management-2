@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import MenuItem from "@mui/material/MenuItem";
 import CardActions from "@mui/material/CardActions";
-import Box from "@mui/material/Box";
+import { Stack } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { RegisterForm } from "./Interfaces";
 import SignupSchema from "./ValidationSchema";
@@ -57,7 +57,7 @@ const SignupPage: React.FC = () => {
         <CommonCard>
           <CommonCardContent>
             <CommonHeadingTypography>Sign Up</CommonHeadingTypography>
-            <Box
+            <Stack
               component="form"
               onSubmit={handleSubmit(onSubmit)}
               sx={{ flexGrow: 1 }}
@@ -104,7 +104,7 @@ const SignupPage: React.FC = () => {
                   </CardActions>
                 </Grid>
               </Grid>
-            </Box>
+            </Stack>
             {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
           </CommonCardContent>
         </CommonCard>
