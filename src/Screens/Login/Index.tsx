@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
+import { Stack } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import CardActions from "@mui/material/CardActions";
 import { LoginFormInterface } from "./Interfaces";
@@ -54,7 +54,7 @@ const LoginPage: React.FC = () => {
         <CommonCard>
           <CommonCardContent>
             <CommonHeadingTypography>Login</CommonHeadingTypography>
-            <Box
+            <Stack
               component="form"
               onSubmit={handleSubmit(onSubmit)}
               sx={{ flexGrow: 1 }}
@@ -84,7 +84,7 @@ const LoginPage: React.FC = () => {
                   </CardActions>
                 </Grid>
               </Grid>
-            </Box>
+            </Stack>
             {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
           </CommonCardContent>
         </CommonCard>

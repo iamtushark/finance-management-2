@@ -6,9 +6,11 @@ import AddBudgetDialog from "../../Components/AddBudget";
 import { AccountBalance } from "@mui/icons-material";
 import AddButton from "../../Components/Common/AddButton";
 import { useAppSelector } from "../../app/hooks";
-import { selectBudget } from "../../features/budget/budgetSlice";
+import { selectBudget, selectBudgetStatus } from "../../features/budget/budgetSlice";
 import { Budget } from "../../dbOperations/interfaces";
 import { convertBudgetDataToList } from "../../utils/chartUtils";
+import CommonBox from "../../Components/Common/CommonBox";
+import CommonCircularProgress from "../../Components/Common/CommonCircularProgress";
 
 const BudgetPage: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -22,6 +24,7 @@ const BudgetPage: React.FC = () => {
   };
 
   const budget = useAppSelector(selectBudget);
+  const budgetStatus = useAppSelector(selectBudgetStatus)
   const [budgetItems, setBudgetItems] = useState<Budget>(budget);
   const totalBudget = Object.values(budgetItems).reduce(
     (value, currentCategory) => {
@@ -43,37 +46,54 @@ const BudgetPage: React.FC = () => {
     setBudgetItems(budget);
   }, [budget]);
 
-  return (
-    <Container>
-      <Grid container spacing={4} justifyContent="center">
-        <Grid item xs={12} md={6}>
-          <SummaryCard
-            value={String(totalBudget)}
-            title="Budget"
-            icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}
-          />
-          <SummaryCard
-            value={String(totalBudgetSpent)}
-            title="Budget"
-            icon={
-              <AccountBalance
-                sx={{
-                  fontSize: 30,
-                  color:
-                    totalBudgetSpent < totalBudget ? "inherit" : "error.main",
-                }}
-              />
-            }
-          />
+  if (budgetStatus === "idle" || budgetStatus === "loading") {
+    return (
+      <CommonBox
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "50vh",
+        }}
+      >
+        <CommonCircularProgress size={80} sx={{ color: "black" }} />
+      </CommonBox>
+    );
+  }
+
+  else {
+    return (
+      <Container>
+        <Grid container spacing={4} justifyContent="center">
+          <Grid item xs={12} md={6}>
+            <SummaryCard
+              value={String(totalBudget)}
+              title="Budget"
+              icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}
+            />
+            <SummaryCard
+              value={String(totalBudgetSpent)}
+              title="Budget"
+              icon={
+                <AccountBalance
+                  sx={{
+                    fontSize: 30,
+                    color:
+                      totalBudgetSpent < totalBudget ? "inherit" : "error.main",
+                  }}
+                />
+              }
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <PieActiveArc data={budgetGraphData} type={"expense"} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <PieActiveArc data={budgetGraphData} type={"expense"} />
-        </Grid>
-      </Grid>
-      <AddButton onClick={handleDialogOpen} />
-      <AddBudgetDialog open={dialogOpen} onClose={handleDialogClose} />
-    </Container>
-  );
+        <AddButton onClick={handleDialogOpen} />
+        <AddBudgetDialog open={dialogOpen} onClose={handleDialogClose} />
+      </Container>
+    );
+  }
 };
 
 export default BudgetPage;

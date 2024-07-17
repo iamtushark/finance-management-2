@@ -6,7 +6,7 @@ import { Budget } from "../../dbOperations/interfaces";
 import { expensesCategory } from "../../Constants/categories";
 
 // for the db operations
-import { setCategoryBudget as setDbCategoryBudget } from "../../dbOperations/operations";
+import { getWholeBudget, setCategoryBudget as setDbCategoryBudget } from "../../dbOperations/operations";
 import { setWholeBudget } from "../../dbOperations/operations";
 
 export interface budgetSliceState {
@@ -32,6 +32,27 @@ export const budgetSlice = createAppSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: create => ({
+    fetchBudget: create.asyncThunk(
+      async (userId: string) => {
+        const budget = await getWholeBudget(userId);
+        return { budget };
+      },
+      {
+        pending: state => {
+          state.status = "loading";
+        },
+        fulfilled: (
+          state,
+          action: PayloadAction<{ budget: Budget}>,
+        ) => {
+          state.status = "succeeded";
+          state.budget = action.payload.budget;
+        },
+        rejected: state => {
+          state.status = "failed";
+        },
+      },
+    ),
     // setting the whole budget object
     setBudget: create.asyncThunk(
       async ({ userId, budget }: { userId: string; budget: Budget }) => {
@@ -103,11 +124,12 @@ export const budgetSlice = createAppSlice({
     selectBudget: state => state.budget,
     selectCategoryBudget: (state: budgetSliceState, category: string) =>
       state.budget[category],
+    selectBudgetStatus : state => state.status
   },
 });
 
 // Action creators are generated for each case reducer function.
-export const { setBudget, setCategoryBudget } = budgetSlice.actions;
+export const { setBudget, setCategoryBudget, fetchBudget } = budgetSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
-export const { selectBudget, selectCategoryBudget } = budgetSlice.selectors;
+export const { selectBudget, selectCategoryBudget, selectBudgetStatus } = budgetSlice.selectors;

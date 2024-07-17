@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Box } from '@mui/material';
+import { Container, Grid, Stack } from '@mui/material';
 import PieChart from '../../Components/PieChart';
 import SummaryCard from '../../Components/SummaryCard';
 import SavingsIcon from '@mui/icons-material/Savings';
@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
         {/* Pie Charts */}
         <Grid container spacing={4} justifyContent="center">
           <Grid item xs={12} sm={6} md={6}>
-            <Box sx={{
+            <Stack sx={{
               border: '2px solid #ccc',
               borderRadius: '16px',
               padding: '24px',
@@ -59,10 +59,10 @@ const Dashboard: React.FC = () => {
             }}>
               <h3>Expenses</h3>
               <PieChart type="expense" data={data} />
-            </Box>
+            </Stack>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <Box sx={{
+            <Stack sx={{
               border: '2px solid #ccc',
               borderRadius: '16px',
               padding: '24px',
@@ -72,7 +72,7 @@ const Dashboard: React.FC = () => {
             }}>
               <h3>Income</h3>
               <PieChart type="income" data={data} />
-            </Box>
+            </Stack>
           </Grid>
         </Grid>
       </Container>

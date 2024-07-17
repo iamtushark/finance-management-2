@@ -12,6 +12,9 @@ import {
 } from "@mui/material";
 import { expensesCategory } from "../Constants/categories";
 import { Budget } from "../dbOperations/interfaces";
+import userEvent from "@testing-library/user-event";
+import { selectLoggedInUser } from "../features/user/userSlice";
+import { toast } from "react-toastify";
 
 interface AddBudgetDialogProps {
   open: boolean;
@@ -22,6 +25,7 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
   const budget = useAppSelector(selectBudget);
   const dispatch = useAppDispatch();
   const [budgetItems, setBudgetItems] = useState<Budget>(budget);
+  const user = useAppSelector(selectLoggedInUser)
 
   const handleAmountSetChange = (
     category: string,
@@ -37,7 +41,12 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
   };
 
   const handleSubmit = () => {
-    dispatch(setBudget({ userId: "", budget: budgetItems }));
+    if(user){
+    dispatch(setBudget({ userId: user, budget: budgetItems }));
+  }
+    else{
+      toast.error("Login before adding Budget")
+    }
     onClose();
   };
 
