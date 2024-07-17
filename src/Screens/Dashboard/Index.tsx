@@ -10,9 +10,10 @@ import { selectExpenseSum, selectExpenseTransactions, selectIncomeSum, selectInc
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import { getDateFilteredExpenseSum, getDateFilteredExpenseTransactions, getDateFilteredIncomeSum, getDateFilteredIncomeTransactions } from '../../features/transaction/utils';
 import { toast } from 'react-toastify';
+import { groupAndSumByCategory } from '../../utils/chartUtils';
 
 const data = [
   { value: 10, label: 'series A' },
@@ -85,21 +86,21 @@ const Dashboard: React.FC = () => {
           <Grid item xs={12} sm={6} md={3}>
             <SummaryCard
               title="Total Income"
-              value="$1,234"
+              value={String(filteredIncomeSum)}
               icon={<AttachMoneyIcon sx={{ fontSize: 30, color: 'primary.main' }} />}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <SummaryCard
               title="Total Spent"
-              value="$5,618"
+              value={String(filteredExpenseSum)}
               icon={<SavingsIcon sx={{ fontSize: 30, color: 'success.main' }} />}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <SummaryCard
               title="Available Balance"
-              value="$5,228"
+              value={String(filteredIncomeSum - filteredExpenseSum)}
               icon={<AccountBalance sx={{ fontSize: 30, color: 'success.main' }} />}
             />
           </Grid>
@@ -119,7 +120,7 @@ const Dashboard: React.FC = () => {
               alignItems: 'center'
             }}>
               <h3>Expenses</h3>
-              <PieChart type="expense" data={data} />
+              <PieChart type="expense" data={groupAndSumByCategory(filteredExpenseArray)} />
             </Stack>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
@@ -132,7 +133,7 @@ const Dashboard: React.FC = () => {
               alignItems: 'center'
             }}>
               <h3>Income</h3>
-              <PieChart type="income" data={data} />
+              <PieChart type="income" data={groupAndSumByCategory(filteredIncomeArray)} />
             </Stack>
           </Grid>
         </Grid>
