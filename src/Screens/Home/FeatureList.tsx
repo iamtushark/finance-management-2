@@ -1,4 +1,3 @@
-// src/components/FeatureList.tsx
 import React from 'react';
 
 const features = [
@@ -22,7 +21,7 @@ const features = [
 
 const FeatureList: React.FC = () => (
   <section style={styles.container}>
-    <h2 style={styles.title}>Why to use <span style={styles.highlight}>Expense.fyi?</span></h2>
+    <h2 style={styles.title}>Why to use <span style={styles.highlight}>Fake.expense.app?</span></h2>
     <ul style={styles.list}>
       {features.map((feature, index) => (
         <li key={index} style={styles.listItem}>

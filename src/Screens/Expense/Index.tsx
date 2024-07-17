@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from '@mui/material';
-import { CommonTableSection, AddButton } from '../../Components/Common/CommonTableSection';
+import { CommonTableSection} from '../../Components/Common/CommonTableSection';
+import AddButton from '../../Components/Common/AddButton';
 import { Transaction, TransactionType } from '../../dbOperations/interfaces';
 import { useSelector } from 'react-redux';
 import { selectTransactions } from '../../features/transaction/transactionSlice';
@@ -18,7 +19,8 @@ const Expenses:React.FC = () => {
     }}>
       <CommonSummarySection total={sum} type='Expense'/>
       <CommonTableSection transactions={expenses}/>
-      <AddButton />
+      {/* <AddButton onClick={handleDialogOpen} />
+        <AddBudgetDialog open={dialogOpen} onClose={handleDialogClose} /> */}
     </Container>
   );
 }

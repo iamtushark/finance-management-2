@@ -1,4 +1,3 @@
-// src/components/FeaturesSection.tsx
 import React from 'react';
 
 const FeaturesSection: React.FC = () => (
@@ -6,9 +5,7 @@ const FeaturesSection: React.FC = () => (
     <h2 style={styles.title}>
       Simple yet, <span style={styles.highlight}>Powerful Features</span>.
     </h2>
-    {/* Add content as per design */}
     <div style={styles.features}>
-      {/* Example content, replace with actual features */}
       <div style={styles.featureCard}>
         <h3>Secure Sign In</h3>
         <p>Ensure your data is secure with our robust authentication system.</p>

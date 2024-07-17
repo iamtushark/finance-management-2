@@ -15,15 +15,9 @@ import { getDateFilteredExpenseSum, getDateFilteredExpenseTransactions, getDateF
 import { toast } from 'react-toastify';
 import { groupAndSumByCategory } from '../../utils/chartUtils';
 
-const data = [
-  { value: 10, label: 'series A' },
-  { value: 15, label: 'series B' },
-  { value: 20, label: 'series C' },
-];
 
 const Dashboard: React.FC = () => {
 
-  const dispatch = useAppDispatch()
   const incomeArray = useAppSelector(selectIncomeTransactions)
   const expenseArray = useAppSelector(selectExpenseTransactions)
   const expenseSum = useAppSelector(selectExpenseSum)
@@ -49,6 +43,9 @@ const Dashboard: React.FC = () => {
       setFilteredIncomeArray(getDateFilteredIncomeTransactions(incomeArray, startDate.toISOString(), endDate.toISOString()))
       setFilteredExpenseSum(getDateFilteredExpenseSum(expenseArray, startDate.toISOString(), endDate.toISOString()))
       setFilteredIncomeSum(getDateFilteredIncomeSum(incomeArray, startDate.toISOString(), endDate.toISOString()))
+      if(filteredExpenseArray.length === 0){
+        toast.info("Add Expense/Income for graphical insights")
+      }
     }
     else{
       toast.warn("Set Appropriate Start and End dates")

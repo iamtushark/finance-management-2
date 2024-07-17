@@ -1,7 +1,11 @@
-// src/components/HeroSection.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const HeroSection: React.FC = () => (
+
+const HeroSection: React.FC = () =>{ 
+  const navigate = useNavigate()
+  
+  return(
   <section style={styles.container}>
     <h1 style={styles.title}>
       Effortlessly Track and Manage <span style={styles.highlight}>Expenses</span>.
@@ -10,11 +14,11 @@ const HeroSection: React.FC = () => (
       Our easy-to-use platform allows you to track and categorize your spending, giving you a clear picture of your financials.
     </p>
     <div style={styles.buttons}>
-      <button style={styles.tryButton}>Try it for Free</button>
-      <button style={styles.starButton}>Star on GitHub</button>
+      <button style={styles.tryButton} onClick={() => navigate("/signup")}>Try it for Free</button>
+      <button style={styles.starButton} onClick={() => window.open('https://github.com/iamtushark/finance-management-2', '_blank')}>Star on GitHub</button>
     </div>
   </section>
-);
+);}
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {

@@ -1,13 +1,18 @@
-    // src/components/Header.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Header: React.FC = () => (
-  <header style={styles.header}>
-    <div style={styles.logo}>Expense.fyi</div>
-    <button style={styles.signInButton}>Sign in</button>
-  </header>
-);
+const Header: React.FC = () => {
+  const navigate = useNavigate();
 
+  return (
+    <header style={styles.header}>
+      <div style={styles.logo}>Fake.Expense.app</div>
+      <button style={styles.signInButton} onClick={() => navigate('/login')}>
+        Log in
+      </button>
+    </header>
+  );
+};
 const styles = {
   header: {
     display: 'flex',
