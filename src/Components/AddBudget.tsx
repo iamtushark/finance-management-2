@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import { expensesCategory } from "../Constants/categories";
 import { Budget } from "../dbOperations/interfaces";
-import userEvent from "@testing-library/user-event";
 import { selectLoggedInUser } from "../features/user/userSlice";
 import { toast } from "react-toastify";
 

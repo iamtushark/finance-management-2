@@ -71,13 +71,25 @@ export const transactionSlice = createAppSlice({
   }),
   selectors: {
     selectTransactions: state => state.transactions,
+    selectIncomeTransactions: state =>
+      state.transactions.filter(transaction => transaction.type === "Income"),
+    selectExpenseTransactions: state =>
+      state.transactions.filter(transaction => transaction.type === "Expense"),
     selectStatus: state => state.status,
+    selectIncomeSum: state =>
+      state.transactions
+        .filter(transaction => transaction.type === "Income")
+        .reduce((sum, transaction) => sum + transaction.amount, 0),
+    selectExpenseSum: state =>
+      state.transactions
+        .filter(transaction => transaction.type === "Expense")
+        .reduce((sum, transaction) => sum + transaction.amount, 0),
   },
 });
 
 export const { fetchTransactions, addNewTransaction } =
   transactionSlice.actions;
 
-export const { selectTransactions, selectStatus } = transactionSlice.selectors;
+export const { selectTransactions, selectStatus, selectIncomeTransactions, selectExpenseTransactions, selectExpenseSum, selectIncomeSum } = transactionSlice.selectors;
 
 export default transactionSlice.reducer;

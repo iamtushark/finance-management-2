@@ -10,6 +10,7 @@ export type TransactionType = "Expense" | "Income";
 export interface Transaction {
   type: TransactionType;
   amount: number;
+  category : string;
   date: Date;
 }
 
