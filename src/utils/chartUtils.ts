@@ -26,3 +26,39 @@ export const groupAndSumByCategory = (transactions: Transaction[]) => {
 
 	return data;
 };
+
+
+export function processTransactionsForSingleLineChart(transactions: Transaction[]): { dates: Date[]; amounts: number[] } {
+	// Initialize variables to track lowest and highest dates
+	let lowestDate = new Date();
+	let highestDate = new Date(0); // Initialize with the earliest possible date
+
+	// Iterate through transactions to find lowest and highest dates
+	transactions.forEach(transaction => {
+		if (transaction.date < lowestDate) {
+			lowestDate = transaction.date;
+		}
+		if (transaction.date > highestDate) {
+			highestDate = transaction.date;
+		}
+	});
+
+	// Generate array of dates between lowestDate and highestDate
+	const datesArray: Date[] = [];
+	let currentDate = new Date(lowestDate.setHours(0,0,0));
+	while (currentDate <= highestDate) {
+		datesArray.push(new Date(currentDate));
+		currentDate.setDate(currentDate.getDate() + 1);
+	}
+
+	// Create array to store aggregated amounts by date
+	const amountsArray: number[] = [];
+	datesArray.forEach(date => {
+		const amountOnDate = transactions
+			.filter(transaction => transaction.date.toDateString() === date.toDateString())
+			.reduce((totalAmount, transaction) => totalAmount + transaction.amount, 0);
+		amountsArray.push(amountOnDate);
+	});
+
+	return { dates: datesArray, amounts: amountsArray };
+}

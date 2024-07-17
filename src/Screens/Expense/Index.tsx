@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Container } from '@mui/material';
 import { CommonTableSection} from '../../Components/Common/CommonTableSection';
 import AddButton from '../../Components/Common/AddButton';
-import { Transaction, TransactionType } from '../../dbOperations/interfaces';
+import { Transaction } from '../../dbOperations/interfaces';
 import { useSelector } from 'react-redux';
 import { selectTransactions } from '../../features/transaction/transactionSlice';
-import CommonSummarySection from '../../Components/Common/CommonSummarySection';
 import AddExpenseDialog from '../../Components/AddExpense';
 import SummaryCard from '../../Components/SummaryCard';
 import { AccountBalance } from '@mui/icons-material';
 import MiniDrawer from '../../Components/Common/CommonSideBar';
+import SingleLineChart from '../../Components/SingleLineChart';
+import { processTransactionsForSingleLineChart } from '../../utils/chartUtils';
+import DualLineChart from '../../Components/DualLineChart';
 
 const Expenses:React.FC = () => {
   const trxns = useSelector(selectTransactions);
@@ -26,6 +28,7 @@ const Expenses:React.FC = () => {
     setDialogOpen(false);
   };
 
+  const {amounts, dates} = processTransactionsForSingleLineChart(expenses)
 
   return(
     <Container sx={{
@@ -33,6 +36,7 @@ const Expenses:React.FC = () => {
     }}>
       <MiniDrawer />
       <SummaryCard value={String(sum)} title='Expense' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
+      <SingleLineChart data={amounts} label='Expense' dates={dates}/>
       <CommonTableSection transactions={expenses}/>
       <AddButton onClick={handleDialogOpen} />
         <AddExpenseDialog open={dialogOpen} onClose={handleDialogClose} />

@@ -8,6 +8,7 @@ export interface User {
 export type TransactionType = "Expense" | "Income";
 
 export interface Transaction {
+  id : number
   type: TransactionType;
   amount: number;
   category : string;
