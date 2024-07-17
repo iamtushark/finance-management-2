@@ -9,6 +9,7 @@ import CommonSummarySection from '../../Components/Common/CommonSummarySection';
 import AddExpenseDialog from '../../Components/AddExpense';
 import SummaryCard from '../../Components/SummaryCard';
 import { AccountBalance } from '@mui/icons-material';
+import MiniDrawer from '../../Components/Common/CommonSideBar';
 
 const Expenses:React.FC = () => {
   const trxns = useSelector(selectTransactions);
@@ -30,6 +31,7 @@ const Expenses:React.FC = () => {
     <Container sx={{
       p: 4,
     }}>
+      <MiniDrawer />
       <SummaryCard value={String(sum)} title='Expense' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
       <CommonTableSection transactions={expenses}/>
       <AddButton onClick={handleDialogOpen} />

@@ -22,6 +22,7 @@ import { Budget } from "../../dbOperations/interfaces";
 import { convertBudgetDataToList } from "../../utils/chartUtils";
 import CommonBox from "../../Components/Common/CommonBox";
 import CommonCircularProgress from "../../Components/Common/CommonCircularProgress";
+import MiniDrawer from "../../Components/Common/CommonSideBar";
 
 const BudgetPage: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -67,6 +68,7 @@ const BudgetPage: React.FC = () => {
   } else {
     return (
       <Container sx={{ bgcolor: "white", borderRadius: '16px', padding: '12px' }}>
+        <MiniDrawer />
         <h1>Overview</h1>
         <h3>Summary</h3>
         <Grid container spacing={4}>
