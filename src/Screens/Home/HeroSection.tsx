@@ -24,7 +24,8 @@ const styles: { [key: string]: React.CSSProperties } = {
   container: {
     textAlign: 'center',
     padding: '2rem',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: 'ffffff',
+    // '#f7f7f7'
   },
   title: {
     fontSize: '2.5rem',
