@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Button } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import SummaryCard from "../../Components/SummaryCard";
 import PieActiveArc from "../../Components/PieChart";
 import AddBudgetDialog from "../../Components/AddBudget";
-import { AccountBalance } from "@mui/icons-material";
+import { AccountBalance, Wallet } from "@mui/icons-material";
 import AddButton from "../../Components/Common/AddButton";
 import { useAppSelector } from "../../app/hooks";
 import { selectBudget, selectBudgetStatus } from "../../features/budget/budgetSlice";
@@ -24,26 +35,20 @@ const BudgetPage: React.FC = () => {
   };
 
   const budget = useAppSelector(selectBudget);
-  const budgetStatus = useAppSelector(selectBudgetStatus)
-  const [budgetItems, setBudgetItems] = useState<Budget>(budget);
-  const totalBudget = Object.values(budgetItems).reduce(
-    (value, currentCategory) => {
-      return value + currentCategory.amountSet;
-    },
-    0,
-  );
+  const budgetStatus = useAppSelector(selectBudgetStatus);
+  const [budgetItems, setBudgetItems] = useState<Budget>(budget || {});
+  const totalBudget = Object.values(budgetItems).reduce((value, currentCategory) => {
+    return value + currentCategory.amountSet;
+  }, 0);
 
-  const totalBudgetSpent = Object.values(budgetItems).reduce(
-    (value, currentCategory) => {
-      return value + currentCategory.amountSpent;
-    },
-    0,
-  );
+  const totalBudgetSpent = Object.values(budgetItems).reduce((value, currentCategory) => {
+    return value + currentCategory.amountSpent;
+  }, 0);
 
   const budgetGraphData = convertBudgetDataToList(budgetItems);
 
-  const budgetSetData = useEffect(() => {
-    setBudgetItems(budget);
+  useEffect(() => {
+    setBudgetItems(budget || {});
   }, [budget]);
 
   if (budgetStatus === "idle" || budgetStatus === "loading") {
@@ -59,34 +64,68 @@ const BudgetPage: React.FC = () => {
         <CommonCircularProgress size={80} sx={{ color: "black" }} />
       </CommonBox>
     );
-  }
-
-  else {
+  } else {
     return (
-      <Container>
-        <Grid container spacing={4} justifyContent="center">
+      <Container sx={{ bgcolor: "white", borderRadius: '16px', padding: '12px' }}>
+        <h1>Overview</h1>
+        <h3>Summary</h3>
+        <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <SummaryCard
               value={String(totalBudget)}
-              title="Budget"
+              title="Total Budget"
               icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}
             />
+          </Grid>
+          <Grid item xs={12} md={6}>
             <SummaryCard
               value={String(totalBudgetSpent)}
-              title="Budget"
+              title="Budget Spent"
               icon={
-                <AccountBalance
+                <Wallet
                   sx={{
                     fontSize: 30,
-                    color:
-                      totalBudgetSpent < totalBudget ? "inherit" : "error.main",
+                    color: totalBudgetSpent < totalBudget ? "inherit" : "error.main",
                   }}
                 />
               }
             />
           </Grid>
+        </Grid>
+        <h3>Reports</h3>
+        <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
-            <PieActiveArc data={budgetGraphData} type={"expense"} />
+            <Box sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
+              <PieActiveArc data={budgetGraphData} type={"expense"} />
+            </Box>
+          </Grid>
+        </Grid>
+        <Grid container spacing={4} sx={{ mt: 4 }}>
+          <Grid item xs={12}>
+            <Box sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Category</TableCell>
+                      <TableCell align="right">Amount Set</TableCell>
+                      <TableCell align="right">Amount Spent</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {Object.entries(budgetItems).map(([category, details]) => (
+                      <TableRow key={category}>
+                        <TableCell component="th" scope="row">
+                          {category}
+                        </TableCell>
+                        <TableCell align="right">{details.amountSet}</TableCell>
+                        <TableCell align="right">{details.amountSpent}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           </Grid>
         </Grid>
         <AddButton onClick={handleDialogOpen} />
