@@ -1,9 +1,8 @@
 import React from 'react';
+import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
@@ -12,96 +11,79 @@ import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded
 import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ContactlessIcon from '@mui/icons-material/Contactless';
+import { useNavigate } from 'react-router-dom';
 
-const containerStyle = {
-  display: 'flex',
-  flexDirection: 'column' as 'column',
-  justifyContent: 'space-between',
-  height: '100vh',
-  width: '60px',
-  backgroundColor: '#111827',
-  color: '#ffffff',
-};
-
-const headerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '8px',
-  backgroundColor: '#111827',
-  color: '#ffffff',
-  cursor: 'pointer',
-};
-
-const listItemButtonStyle = {
-  margin: '8px 0',
-};
-
-const iconStyle = {
-  color: '#ffffff',
-  fontSize: '36px',
-  border: '2px solid #ffffff',
-  borderRadius: '50%',
-  padding: '4px',
-};
-
-const dividerStyle = {
-  width: '100%',
-  height: '2px',
-  backgroundColor: '#ffffff',
-  margin: '8px 0',
-};
+const drawerWidth = 60;
 
 export default function MiniDrawer() {
-  const handleHomeClick = () => {
-    window.location.href = '/home';
-  };
+  const navigate = useNavigate();
 
   return (
-    <div style={containerStyle}>
-      <div style={headerStyle}>
-        <Typography variant="h6" noWrap component="div">
-          Finance
-        </Typography>
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+          backgroundColor: '#111827',
+          color: '#ffffff',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          overflow: 'hidden',
+        },
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '8px',
+          backgroundColor: '#111827',
+          color: '#ffffff',
+          cursor: 'pointer',
+        }}
+      >
+        <ContactlessIcon sx={{ color: '#ffffff', fontSize: '48px' }} />
       </div>
       <List style={{ flexGrow: 1 }}>
         <ListItem disablePadding>
           <Tooltip title="Overview" placement="right" arrow>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate('/dashboard')}>
               <ListItemIcon>
-                <AccountBalanceRoundedIcon style={{ color: '#ffffff' }} />
+                <AccountBalanceRoundedIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
               </ListItemIcon>
-              <ListItemText primary="Overview" style={{ display: 'none' }} />
             </ListItemButton>
           </Tooltip>
         </ListItem>
         <ListItem disablePadding>
           <Tooltip title="Income" placement="right" arrow>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate('/income')}>
               <ListItemIcon>
-                <MonetizationOnRoundedIcon style={{ color: '#ffffff' }} />
+                <MonetizationOnRoundedIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
               </ListItemIcon>
-              <ListItemText primary="Income" style={{ display: 'none' }} />
             </ListItemButton>
           </Tooltip>
         </ListItem>
         <ListItem disablePadding>
           <Tooltip title="Expenses" placement="right" arrow>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate('/expense')}>
               <ListItemIcon>
-                <SavingsRoundedIcon style={{ color: '#ffffff' }} />
+                <SavingsRoundedIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
               </ListItemIcon>
-              <ListItemText primary="Expenses" style={{ display: 'none' }} />
             </ListItemButton>
           </Tooltip>
         </ListItem>
         <ListItem disablePadding>
           <Tooltip title="Budget" placement="right" arrow>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate('/budget')}>
               <ListItemIcon>
-                <AccountBalanceWalletRoundedIcon style={{ color: '#ffffff' }} />
+                <AccountBalanceWalletRoundedIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
               </ListItemIcon>
-              <ListItemText primary="Budget" style={{ display: 'none' }} />
             </ListItemButton>
           </Tooltip>
         </ListItem>
@@ -109,25 +91,23 @@ export default function MiniDrawer() {
       <List>
         <ListItem disablePadding>
           <Tooltip title="Profile" placement="right" arrow>
-            <ListItemButton style={listItemButtonStyle}>
+            <ListItemButton sx={{ margin: '8px 0' }} onClick={() => navigate('/')}>
               <ListItemIcon>
-                <AccountBoxIcon style={{ color: '#ffffff' }} />
+                <AccountBoxIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
               </ListItemIcon>
-              <ListItemText primary="Profile" style={{ display: 'none' }} />
             </ListItemButton>
           </Tooltip>
         </ListItem>
         <ListItem disablePadding>
           <Tooltip title="Logout" placement="right" arrow>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate('/logout')}>
               <ListItemIcon>
-                <LogoutIcon style={{ color: '#ffffff' }} />
+                <LogoutIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
               </ListItemIcon>
-              <ListItemText primary="Logout" style={{ display: 'none' }} />
             </ListItemButton>
           </Tooltip>
         </ListItem>
       </List>
-    </div>
+    </Drawer>
   );
 }
