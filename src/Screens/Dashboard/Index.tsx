@@ -14,6 +14,7 @@ import { Dayjs } from 'dayjs';
 import { getDateFilteredExpenseSum, getDateFilteredExpenseTransactions, getDateFilteredIncomeSum, getDateFilteredIncomeTransactions } from '../../features/transaction/utils';
 import { toast } from 'react-toastify';
 import { groupAndSumByCategory } from '../../utils/chartUtils';
+import MiniDrawer from '../../Components/Common/CommonSideBar';
 
 
 const Dashboard: React.FC = () => {
@@ -54,6 +55,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
+      <MiniDrawer />
       <Container sx={{ bgcolor: "white", border: '1px ', borderRadius: '16px', padding: '12px' }}>
         <h1>Overview</h1>
         <Grid container spacing={4} justifyContent="center">
