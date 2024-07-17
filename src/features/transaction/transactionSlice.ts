@@ -1,4 +1,4 @@
-import { getTransactions, addTransaction } from "../../dbOperations/operations";
+import { getTransactions, addTransaction, editTransaction as editDBTransaction} from "../../dbOperations/operations";
 import { TransactionType, Transaction } from "../../dbOperations/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../../app/createAppSlice";
@@ -68,6 +68,39 @@ export const transactionSlice = createAppSlice({
         },
       },
     ),
+    editTransaction: create.asyncThunk(
+      async ({
+        userId,
+        transactionId,
+        updatedTransaction,
+      }: {
+        userId: string;
+        transactionId: string;
+        updatedTransaction: Partial<Transaction>;
+      }) => {
+        const updatedTransactions = await editDBTransaction(
+          userId,
+          transactionId,
+          updatedTransaction,
+        );
+        return { updatedTransactions };
+      },
+      {
+        pending: state => {
+          state.status = "loading";
+        },
+        fulfilled: (
+          state,
+          action: PayloadAction<{ updatedTransactions: Transaction[] }>,
+        ) => {
+          state.status = "succeeded";
+          state.transactions = action.payload.updatedTransactions;
+        },
+        rejected: state => {
+          state.status = "failed";
+        },
+      },
+    ),
   }),
   selectors: {
     selectTransactions: state => state.transactions,
@@ -87,7 +120,7 @@ export const transactionSlice = createAppSlice({
   },
 });
 
-export const { fetchTransactions, addNewTransaction } =
+export const { fetchTransactions, editTransaction ,addNewTransaction } =
   transactionSlice.actions;
 
 export const { selectTransactions, selectStatus, selectIncomeTransactions, selectExpenseTransactions, selectExpenseSum, selectIncomeSum } = transactionSlice.selectors;

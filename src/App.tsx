@@ -19,7 +19,6 @@ const App = () => {
     initializeDataStore();
 
     const userId = localStorage.getItem(localStorageKeys.user);
-    console.log("userid", userId);
     if (userId) {
       dispatch(setUser(userId))
       dispatch(fetchTransactions(userId));

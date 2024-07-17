@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { addNewTransaction } from "../features/transaction/transactionSlice";
 import dayjs, { Dayjs } from "dayjs";
 import { SelectChangeEvent } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 
 
 interface AddIncomeDialogProps {
@@ -61,7 +62,8 @@ const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({ open, onClose }) => {
 				amount: amount,
 				type: "Income",
 				date: selectedDate.toDate(),
-				category: selectedCategory
+				category: selectedCategory,
+				id : uuidv4()
 			};
 			dispatch(addNewTransaction({ userId: user, transaction: newTransaction }));
 		} else {

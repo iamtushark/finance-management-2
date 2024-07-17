@@ -29,11 +29,9 @@ export const groupAndSumByCategory = (transactions: Transaction[]) => {
 
 
 export function processTransactionsForSingleLineChart(transactions: Transaction[]): { dates: Date[]; amounts: number[] } {
-	// Initialize variables to track lowest and highest dates
 	let lowestDate = new Date();
 	let highestDate = new Date(0); // Initialize with the earliest possible date
 
-	// Iterate through transactions to find lowest and highest dates
 	transactions.forEach(transaction => {
 		if (transaction.date < lowestDate) {
 			lowestDate = transaction.date;
@@ -43,7 +41,6 @@ export function processTransactionsForSingleLineChart(transactions: Transaction[
 		}
 	});
 
-	// Generate array of dates between lowestDate and highestDate
 	const datesArray: Date[] = [];
 	let currentDate = new Date(lowestDate.setHours(0,0,0));
 	while (currentDate <= highestDate) {
@@ -51,7 +48,6 @@ export function processTransactionsForSingleLineChart(transactions: Transaction[
 		currentDate.setDate(currentDate.getDate() + 1);
 	}
 
-	// Create array to store aggregated amounts by date
 	const amountsArray: number[] = [];
 	datesArray.forEach(date => {
 		const amountOnDate = transactions
@@ -62,3 +58,45 @@ export function processTransactionsForSingleLineChart(transactions: Transaction[
 
 	return { dates: datesArray, amounts: amountsArray };
 }
+
+export function processTransactionsForDualLineChart(
+	incomeTransactions: Transaction[],
+	expenseTransactions: Transaction[]
+  ): { dates: Date[]; incomeAmounts: number[]; expenseAmounts: number[] } {
+	// Initialize variables to track lowest and highest dates
+	let lowestDate = new Date(Math.min(
+	  ...incomeTransactions.map(t => t.date.getTime()),
+	  ...expenseTransactions.map(t => t.date.getTime())
+	));
+  
+	let highestDate = new Date(Math.max(
+	  ...incomeTransactions.map(t => t.date.getTime()),
+	  ...expenseTransactions.map(t => t.date.getTime())
+	));
+  
+	// Generate array of dates between lowestDate and highestDate
+	const datesArray: Date[] = [];
+	let currentDate = new Date(lowestDate.setHours(0, 0, 0));
+	while (currentDate <= highestDate) {
+	  datesArray.push(new Date(currentDate));
+	  currentDate.setDate(currentDate.getDate() + 1);
+	}
+  
+	// Create arrays to store aggregated amounts by date
+	const incomeAmountsArray: number[] = [];
+	const expenseAmountsArray: number[] = [];
+  
+	datesArray.forEach(date => {
+	  const incomeAmountOnDate = incomeTransactions
+		.filter(transaction => transaction.date.toDateString() === date.toDateString())
+		.reduce((totalAmount, transaction) => totalAmount + transaction.amount, 0);
+	  incomeAmountsArray.push(incomeAmountOnDate);
+  
+	  const expenseAmountOnDate = expenseTransactions
+		.filter(transaction => transaction.date.toDateString() === date.toDateString())
+		.reduce((totalAmount, transaction) => totalAmount + transaction.amount, 0);
+	  expenseAmountsArray.push(expenseAmountOnDate);
+	});
+  
+	return { dates: datesArray, incomeAmounts: incomeAmountsArray, expenseAmounts: expenseAmountsArray };
+  }

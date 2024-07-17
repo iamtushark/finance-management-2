@@ -94,6 +94,42 @@ export const getTransactions = async (
   return transactions ? transactions[userId] || [] : [];
 };
 
+export const editTransaction = async (
+  userId: string,
+  transactionId: string,
+  updatedTransaction: Partial<Transaction>
+): Promise<Transaction[]> => {
+  let transactions = await localforage.getItem<DBTransactions>(
+    DBKeys.transactions
+  );
+
+  if (!transactions) {
+    await localforage.setItem(DBKeys.transactions, INITIAL_TRANSACTIONS);
+    transactions = INITIAL_TRANSACTIONS;
+  }
+
+  if (!transactions[userId]) {
+    throw new Error("No transactions found for the user.");
+  }
+
+  const userTransactions = transactions[userId];
+  const transactionIndex = userTransactions.findIndex(
+    (transaction) => transaction.id === transactionId
+  );
+
+  if (transactionIndex === -1) {
+    throw new Error("Transaction not found.");
+  }
+
+  userTransactions[transactionIndex] = {
+    ...userTransactions[transactionIndex],
+    ...updatedTransaction,
+  };
+
+  await localforage.setItem(DBKeys.transactions, transactions);
+  return userTransactions
+};
+
 // Budget Operations
 export const setCategoryBudget = async (
   userId: string,

@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { addNewTransaction } from "../features/transaction/transactionSlice";
 import dayjs, { Dayjs } from "dayjs";
 import { SelectChangeEvent } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 
 
 interface AddExpenseDialogProps {
@@ -61,7 +62,8 @@ const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({ open, onClose }) =>
 				amount: amount,
 				type: "Expense",
 				date: selectedDate.toDate(),
-				category: selectedCategory
+				category: selectedCategory,
+				id : uuidv4()
 			};
 			dispatch(addNewTransaction({ userId: user, transaction: newTransaction }));
 		} else {
