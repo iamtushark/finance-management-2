@@ -1,10 +1,10 @@
 import React from 'react';
-import { TextField, Box } from '@mui/material';
+import { TextField, Box, Stack } from '@mui/material';
 
 const FilterSection = () => (
-  <Box my={2}>
+  <Stack my={2}>
     <TextField label="Filter by name" variant="outlined" fullWidth />
-  </Box>
+  </Stack>
 );
 
 export default FilterSection;

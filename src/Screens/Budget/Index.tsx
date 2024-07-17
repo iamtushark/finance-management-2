@@ -10,6 +10,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Stack,
 } from "@mui/material";
 import SummaryCard from "../../Components/SummaryCard";
 import PieActiveArc from "../../Components/PieChart";
@@ -97,14 +98,14 @@ const BudgetPage: React.FC = () => {
         <h3>Reports</h3>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
-            <Box sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
+            <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
               <PieActiveArc data={budgetGraphData} type={"expense"} />
-            </Box>
+            </Stack>
           </Grid>
         </Grid>
         <Grid container spacing={4} sx={{ mt: 4 }}>
           <Grid item xs={12}>
-            <Box sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
+            <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
@@ -127,7 +128,7 @@ const BudgetPage: React.FC = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
-            </Box>
+            </Stack>
           </Grid>
         </Grid>
         <AddButton onClick={handleDialogOpen} />

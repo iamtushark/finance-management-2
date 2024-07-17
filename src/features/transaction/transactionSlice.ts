@@ -3,6 +3,7 @@ import { TransactionType, Transaction } from "../../dbOperations/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../../app/createAppSlice";
 import type { AppThunk } from "../../app/store";
+import { Category } from "@mui/icons-material";
 
 interface TransactionSliceState {
   transactions: Transaction[];
@@ -10,7 +11,33 @@ interface TransactionSliceState {
 }
 
 const initialState: TransactionSliceState = {
-  transactions: [],
+  transactions: [
+  { id:1,    
+    type: 'Income',
+    amount: 20000,
+    category: 'Salary',
+    date: new Date(Date.now()),
+  },   
+  { id:2,    
+    type: 'Income',
+    amount: 20000,
+    category: 'Other',
+    date: new Date(Date.now()),
+  },  
+  { id:3,    
+    type: 'Expense',
+    amount: 200,
+    category: 'fine',
+    date: new Date(Date.now()),
+  },  
+  {   
+    id:4, 
+    type: 'Expense',
+    amount: 5000,
+    category: 'misc',
+    date: new Date(Date.now()),
+  },
+  ],
   status: "idle",
 };
 
