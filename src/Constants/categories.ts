@@ -45,7 +45,6 @@ interface Income {
 }
 
 export const incomeCategory: Income = {
-  "": "Select",
   ads: "Ads",
   other: "Other",
   passiveincome: "Passive Income",
