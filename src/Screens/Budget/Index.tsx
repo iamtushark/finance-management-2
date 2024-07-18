@@ -24,6 +24,7 @@ import { convertBudgetDataToList } from "../../utils/chartUtils";
 import CommonBox from "../../Components/Common/CommonBox";
 import CommonCircularProgress from "../../Components/Common/CommonCircularProgress";
 import MiniDrawer from "../../Components/Common/CommonSideBar";
+import { selectExpenseSum } from "../../features/transaction/transactionSlice";
 
 const BudgetPage: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -37,14 +38,11 @@ const BudgetPage: React.FC = () => {
   };
 
   const budget = useAppSelector(selectBudget);
+  const totalBudgetSpent = useAppSelector(selectExpenseSum);
   const budgetStatus = useAppSelector(selectBudgetStatus);
   const [budgetItems, setBudgetItems] = useState<Budget>(budget || {});
   const totalBudget = Object.values(budgetItems).reduce((value, currentCategory) => {
     return value + currentCategory.amountSet;
-  }, 0);
-
-  const totalBudgetSpent = Object.values(budgetItems).reduce((value, currentCategory) => {
-    return value + currentCategory.amountSpent;
   }, 0);
 
   const budgetGraphData = convertBudgetDataToList(budgetItems);
