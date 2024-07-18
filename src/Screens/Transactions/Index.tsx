@@ -10,16 +10,17 @@ const TransactionPage:React.FC = () => {
   const trxns = useSelector(selectTransactions);
 
   return(
+    <>
+    <CommonTopBar title="Transactions"/>
     <Container sx={{
       p: 1,
     }}>
 
-      <CommonTopBar title="Transactions"/>
-      <MiniDrawer />
       <Container sx={{p:4} }>
         <CommonTableSection transactions={trxns} showType={true} showEditButton={false} type='Expense' />
       </Container>
     </Container>
+    </>
   );
 }
 

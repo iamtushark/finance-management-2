@@ -32,13 +32,13 @@ const Incomes:React.FC = () => {
   const {amounts, dates} = processTransactionsForSingleLineChart(incomes)
 
   return(
+    <>
+    <CommonTopBar title="Income"/>
     <Container sx={{
       p: 1,
+      // marginX: '48px',
     }}>
-      <CommonTopBar title="Income"/>
-      <MiniDrawer />
-      <Divider sx={{ position: 'absolute', left: 0, right: 0, top: 64, border: '1px inset black', backgroundColor: '#ffffff' }} />
-       
+           
       <SummaryCard value={String(sum)} title='Income' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
       <CommonTableSection transactions={incomes} type={"Income"}/>
       <CommonCard>
@@ -48,6 +48,7 @@ const Incomes:React.FC = () => {
       <AddButton onClick={handleDialogOpen} />
         <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />
     </Container>
+    </>
   );
 }
 

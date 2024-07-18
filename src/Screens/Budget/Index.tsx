@@ -26,6 +26,8 @@ import CommonCircularProgress from "../../Components/Common/CommonCircularProgre
 import MiniDrawer from "../../Components/Common/CommonSideBar";
 import { selectExpenseSum } from "../../features/transaction/transactionSlice";
 import CommonTopBar from "../../Components/Common/CommonTopBar";
+import CommonContainer from "../../Components/Common/CommonContainer";
+import CommonCard from "../../Components/Common/CommonCard";
 
 const BudgetPage: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -67,19 +69,19 @@ const BudgetPage: React.FC = () => {
     );
   } else {
     return (
-      <Container sx={{ bgcolor: "white", borderRadius: '16px', padding: '12px', marginLeft:'72px' }}>
-        <MiniDrawer />
-        <CommonTopBar title="Overview"/>
+    <>
+      <CommonTopBar title="Overview"/>
+      <Container>
         <h3>Summary</h3>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
+        <Grid container spacing={2}>
+          <Grid item>
             <SummaryCard
               value={String(totalBudget)}
               title="Total Budget"
               icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item>
             <SummaryCard
               value={String(totalBudgetSpent)}
               title="Budget Spent"
@@ -95,13 +97,11 @@ const BudgetPage: React.FC = () => {
           </Grid>
         </Grid>
         <h3>Reports</h3>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
+            {/* <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}> */}
+            <CommonCard sx={{display:'flex', ml:'0px'}}>
               <PieActiveArc data={budgetGraphData} type={"expense"} />
-            </Stack>
-          </Grid>
-        </Grid>
+            </CommonCard>
+            {/* </Stack> */}
         <Grid container spacing={4} sx={{ mt: 4 }}>
           <Grid item xs={12}>
           <Stack>
@@ -127,12 +127,13 @@ const BudgetPage: React.FC = () => {
                 </TableBody>
               </Table>
             </TableContainer>
-</Stack>
+          </Stack>
           </Grid>
         </Grid>
         <AddButton onClick={handleDialogOpen} />
         <AddBudgetDialog open={dialogOpen} onClose={handleDialogClose} />
       </Container>
+    </>
     );
   }
 };

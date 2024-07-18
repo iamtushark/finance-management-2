@@ -42,6 +42,7 @@ import { selectBudgetStatus } from "../../features/budget/budgetSlice";
 import CommonCircularProgress from "../../Components/Common/CommonCircularProgress";
 import CommonBox from "../../Components/Common/CommonBox";
 import CommonCard from "../../Components/Common/CommonCard";
+import CommonTopBar from "../../Components/Common/CommonTopBar";
 
 const Dashboard: React.FC = () => {
   const incomeArray = useAppSelector(selectIncomeTransactions);
@@ -177,154 +178,159 @@ const Dashboard: React.FC = () => {
   } else {
     return (
       <div>
-        <MiniDrawer />
+        <CommonTopBar title="Overview" />
+
         {/* <Container sx={{ bgcolor: "white", border: '1px ', borderRadius: '16px', padding: '12px' }}> */}
-        <div
-          style={{
-            backgroundColor: "#f1f1f1f1",
-            marginBottom: "4rem",
-            minWidth: "100%",
-            maxWidth: "100%",
-            overflow: "hidden",
-            maxHeight: "5rem",
+        <Container
+          sx={{
+            p: 1,
+            marginX: "48px",
           }}
         >
+          <div
+            style={{
+              // backgroundColor: "#f1f1f1f1",
+              // marginBottom: '1.6rem',
+              padding: "0rem 1.6rem",
+              paddingBottom: "2rem",
+              marginBottom: "2rem",
+              minWidth: "100%",
+              maxWidth: "100%",
+              overflow: "hidden",
+              maxHeight: "5rem",
+            }}
+          >
+            <Grid
+              container
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+              sx={{ minWidth: "100%", maxWidth: "100%" }}
+            >
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Grid item xs={10} sm={6} md={3}>
+                  <DatePicker
+                    label="Start Date"
+                    value={startDate}
+                    onChange={handleStartDateChange}
+                    sx={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={10} sm={6} md={3}>
+                  <DatePicker
+                    label="End Date"
+                    value={endDate}
+                    onChange={handleEndDateChange}
+                    sx={{ width: "100%" }}
+                  />
+                </Grid>
+              </LocalizationProvider>
+
+              <Grid
+                item
+                xs={10}
+                sm={6}
+                md={2}
+                display="flex"
+                alignItems="center"
+              >
+                <Button
+                  variant="contained"
+                  onClick={handleSave}
+                  sx={{
+                    backgroundColor: "primary.main",
+                    height: 50,
+                    fontSize: "0.9rem",
+                    fontWeight: "600",
+                    maxWidth: 350,
+                    borderRadius: "50px",
+                    marginLeft: "1rem",
+                    color: "white",
+                    "&:hover": {
+                      backgroundColor: "primary.dark",
+                    },
+                  }}
+                >
+                  Search
+                </Button>
+              </Grid>
+            </Grid>
+          </div>
+
+          <Grid container spacing={4} justifyContent="center"></Grid>
+
+          <Grid container spacing={4} justifyContent="center" maxWidth={"100%"}>
+            {/* Summary Cards */}
+            <Grid item xs={10} sm={6} md={3}>
+              <SummaryCard
+                title="Total Income"
+                value={String(filteredIncomeSum)}
+                icon={
+                  <AttachMoneyIcon
+                    sx={{ fontSize: 30, color: "primary.main" }}
+                  />
+                }
+              />
+            </Grid>
+            <Grid item xs={10} sm={6} md={3}>
+              <SummaryCard
+                title="Total Spent"
+                value={String(filteredExpenseSum)}
+                icon={
+                  <SavingsIcon sx={{ fontSize: 30, color: "success.main" }} />
+                }
+              />
+            </Grid>
+            <Grid item xs={10} sm={6} md={3}>
+              <SummaryCard
+                title="Available Balance"
+                value={String(filteredIncomeSum - filteredExpenseSum)}
+                icon={
+                  <AccountBalance
+                    sx={{ fontSize: 30, color: "success.main" }}
+                  />
+                }
+              />
+            </Grid>
+          </Grid>
+
+          {/* Pie Charts */}
           <Grid
             container
-            spacing={2}
+            spacing={4}
             justifyContent="center"
-            alignItems="center"
-            sx={{ minWidth: "100%", maxWidth: "100%" }}
+            sx={{ m: "4px", maxWidth: "100%" }}
           >
-            <Grid item xs={10} sm={6} md={2}>
-              <Typography
-                variant="h1"
-                align="left"
-                sx={{
-                  margin: "2.25rem",
-                  fontSize: "2.5rem",
-                  fontWeight: "bold",
-                }}
-              >
-                Overview
-              </Typography>
+            <Grid item xs={10} sm={6} md={5}>
+              <CommonCard>
+                <h3>Expenses</h3>
+                <PieChart
+                  type="expense"
+                  data={groupAndSumByCategory(filteredExpenseArray)}
+                />
+              </CommonCard>
             </Grid>
-
-            <Grid item xs={10} sm={6} md={2}></Grid>
-
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Grid item xs={10} sm={6} md={3}>
-                <DatePicker
-                  label="Start Date"
-                  value={startDate}
-                  onChange={handleStartDateChange}
-                  sx={{ width: "100%", height: "5.3rem", fontSize: "0.52rem" }}
+            <Grid item xs={10} sm={6} md={5}>
+              <CommonCard>
+                <h3>Income</h3>
+                <PieChart
+                  type="income"
+                  data={groupAndSumByCategory(filteredIncomeArray)}
                 />
-              </Grid>
-              <Grid item xs={10} sm={6} md={3}>
-                <DatePicker
-                  label="End Date"
-                  value={endDate}
-                  onChange={handleEndDateChange}
-                  sx={{ width: "100%", height: "5.3rem", fontSize: "0.25rem" }}
+              </CommonCard>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <CommonCard>
+                <h3>Income and Expense</h3>
+                <DualLineChart
+                  dates={dates}
+                  IncomeArray={incomeAmounts}
+                  ExpenseArray={expenseAmounts}
                 />
-              </Grid>
-            </LocalizationProvider>
-
-            <Grid item xs={10} sm={6} md={2} display="flex" alignItems="center">
-              <Button
-                variant="contained"
-                onClick={handleSave}
-                sx={{
-                  backgroundColor: "primary.main",
-                  height: 50,
-                  fontSize: "0.9rem",
-                  fontWeight: "600",
-                  maxWidth: 350,
-                  borderRadius: "50px",
-                  marginLeft: "1rem",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "primary.dark",
-                  },
-                }}
-              >
-                Save
-              </Button>
+              </CommonCard>
             </Grid>
           </Grid>
-        </div>
-
-        <Grid container spacing={4} justifyContent="center"></Grid>
-
-        <Grid container spacing={4} justifyContent="center" maxWidth={"100%"}>
-          {/* Summary Cards */}
-          <Grid item xs={10} sm={6} md={3}>
-            <SummaryCard
-              title="Total Income"
-              value={String(filteredIncomeSum)}
-              icon={
-                <AttachMoneyIcon sx={{ fontSize: 30, color: "primary.main" }} />
-              }
-            />
-          </Grid>
-          <Grid item xs={10} sm={6} md={3}>
-            <SummaryCard
-              title="Total Spent"
-              value={String(filteredExpenseSum)}
-              icon={
-                <SavingsIcon sx={{ fontSize: 30, color: "success.main" }} />
-              }
-            />
-          </Grid>
-          <Grid item xs={10} sm={6} md={3}>
-            <SummaryCard
-              title="Available Balance"
-              value={String(filteredIncomeSum - filteredExpenseSum)}
-              icon={
-                <AccountBalance sx={{ fontSize: 30, color: "success.main" }} />
-              }
-            />
-          </Grid>
-        </Grid>
-
-        {/* Pie Charts */}
-        <Grid
-          container
-          spacing={4}
-          justifyContent="center"
-          sx={{ m: "4px", maxWidth: "100%" }}
-        >
-          <Grid item xs={10} sm={6} md={5}>
-            <CommonCard>
-              <h3>Expenses</h3>
-              <PieChart
-                type="expense"
-                data={groupAndSumByCategory(filteredExpenseArray)}
-              />
-            </CommonCard>
-          </Grid>
-          <Grid item xs={10} sm={6} md={5}>
-            <CommonCard>
-              <h3>Income</h3>
-              <PieChart
-                type="income"
-                data={groupAndSumByCategory(filteredIncomeArray)}
-              />
-            </CommonCard>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-            <CommonCard>
-              <h3>Income and Expense</h3>
-              <DualLineChart
-                dates={dates}
-                IncomeArray={incomeAmounts}
-                ExpenseArray={expenseAmounts}
-              />
-            </CommonCard>
-          </Grid>
-        </Grid>
-        {/* </Container> */}
+        </Container>
       </div>
     );
   }

@@ -13,6 +13,7 @@ import SingleLineChart from '../../Components/SingleLineChart';
 import { processTransactionsForSingleLineChart } from '../../utils/chartUtils';
 import DualLineChart from '../../Components/DualLineChart';
 import CommonTopBar from '../../Components/Common/CommonTopBar';
+import CommonCard from '../../Components/Common/CommonCard';
 
 const Expenses:React.FC = () => {
   const trxns = useSelector(selectTransactions);
@@ -32,24 +33,35 @@ const Expenses:React.FC = () => {
   const {amounts, dates} = processTransactionsForSingleLineChart(expenses)
 
   return(
+    <>
+    <CommonTopBar title="Expense"/>
     <Container sx={{
       p: 1,
+      alignItems: 'left'
+      // al
     }}>
-      <CommonTopBar title="Expense"/>
-      <MiniDrawer />
-      <Divider sx={{ position: 'absolute', left: 0, right: 0, top: 64, border: '1px inset black', backgroundColor: '#ffffff' }} />
-      <Box component="h3" sx={{ marginLeft: 6 }}>
+      <Box component="h3" sx={{ mx: 0}}>
         Summary
       </Box>
-      <SummaryCard value={String(sum)} title='Expense' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
-      <Box component="h3" sx={{ marginLeft: 6, marginTop:2}}>
+
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'flex-start',
+
+      }}>
+        <SummaryCard value={String(sum)} title='Expense' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
+      </Box>
+      <Box component="h3" sx={{ mx: 0, marginTop:2}}>
         Reports
       </Box>
-      <SingleLineChart data={amounts} label='Expense' dates={dates}/>
+      <CommonCard>
+        <SingleLineChart data={amounts} label='Expense' dates={dates}/>
+      </CommonCard>
       <CommonTableSection transactions={expenses} type='Expense'/>
       <AddButton onClick={handleDialogOpen} />
         <AddExpenseDialog open={dialogOpen} onClose={handleDialogClose} />
     </Container>
+    </>
   );
 }
 
