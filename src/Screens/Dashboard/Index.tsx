@@ -41,6 +41,7 @@ import DualLineChart from "../../Components/DualLineChart";
 import { selectBudgetStatus } from "../../features/budget/budgetSlice";
 import CommonCircularProgress from "../../Components/Common/CommonCircularProgress";
 import CommonBox from "../../Components/Common/CommonBox";
+import CommonCard from "../../Components/Common/CommonCard";
 
 const Dashboard: React.FC = () => {
   const incomeArray = useAppSelector(selectIncomeTransactions);
@@ -295,84 +296,32 @@ const Dashboard: React.FC = () => {
           sx={{ m: "4px", maxWidth: "100%" }}
         >
           <Grid item xs={10} sm={6} md={5}>
-            <Stack
-              sx={{
-                width: "85%",
-                mx: "auto",
-                my: 1,
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                borderRadius: "8px",
-                backgroundColor: "rgba(255, 255, 255, 0.3)",
-                backdropFilter: "blur(10px)",
-                // border: '2px solid #ccc',
-                // borderRadius: '16px',
-                // padding: '24px',
-                // display: 'flex',
-                // flexDirection: 'column',
-                // alignItems: 'center'
-              }}
-            >
+            <CommonCard>
               <h3>Expenses</h3>
               <PieChart
                 type="expense"
                 data={groupAndSumByCategory(filteredExpenseArray)}
               />
-            </Stack>
+            </CommonCard>
           </Grid>
           <Grid item xs={10} sm={6} md={5}>
-            <Stack
-              sx={{
-                width: "85%",
-                mx: "auto",
-                my: 1,
-                p: 2,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                borderRadius: "8px",
-                backgroundColor: "rgba(255, 255, 255, 0.3)",
-                backdropFilter: "blur(10px)",
-              }}
-            >
+            <CommonCard>
               <h3>Income</h3>
               <PieChart
                 type="income"
                 data={groupAndSumByCategory(filteredIncomeArray)}
               />
-            </Stack>
+            </CommonCard>
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <Stack
-              sx={{
-                width: "85%",
-                mx: "auto",
-                my: 1,
-                // p: 2,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                borderRadius: "8px",
-                backgroundColor: "rgba(255, 255, 255, 0.3)",
-                backdropFilter: "blur(10px)",
-                padding: "24px",
-              }}
-            >
+            <CommonCard>
               <h3>Income and Expense</h3>
               <DualLineChart
                 dates={dates}
                 IncomeArray={incomeAmounts}
                 ExpenseArray={expenseAmounts}
               />
-            </Stack>
+            </CommonCard>
           </Grid>
         </Grid>
         {/* </Container> */}
