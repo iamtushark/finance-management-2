@@ -3,6 +3,7 @@ import { TransactionType, Transaction } from "../../dbOperations/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../../app/createAppSlice";
 import type { AppThunk } from "../../app/store";
+import { Category } from "@mui/icons-material";
 
 interface TransactionSliceState {
   transactions: Transaction[];

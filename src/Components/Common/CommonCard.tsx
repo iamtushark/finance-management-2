@@ -8,13 +8,22 @@ const CommonCard: React.FC<CommonCardProps> = ({ children, ...props }) => {
     <Card
       {...props}
       sx={{
-        maxWidth: 800,
-        margin: "auto",
-        marginTop: 2,
-        padding: 2,
-        marginBottom: 4,
-        backgroundColor: "white",
-        color: "black",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        borderRadius: "8px",
+        backgroundColor: "rgba(255, 255, 255, 0.3)",
+        backdropFilter: "blur(10px)",
+        padding: "24px",
+        // maxWidth: 800,
+        // margin: "auto",
+        // marginTop: 2,
+        // padding: 2,
+        // marginBottom: 4,
+        // backgroundColor: "white",
+        // color: "black",
         ...props.sx,
       }}
     >
