@@ -104,30 +104,30 @@ const BudgetPage: React.FC = () => {
         </Grid>
         <Grid container spacing={4} sx={{ mt: 4 }}>
           <Grid item xs={12}>
-            <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px',}}>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Category</TableCell>
-                      <TableCell align="right">Amount Set</TableCell>
-                      <TableCell align="right">Amount Spent</TableCell>
+          <Stack>
+            <TableContainer component={Paper} sx={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', overflow: 'hidden', backgroundColor: 'white'  }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ fontWeight: 'bold' }}>Category</TableCell>
+                    <TableCell align="right" sx={{ fontWeight: 'bold' }}>Amount Set</TableCell>
+                    <TableCell align="right" sx={{ fontWeight: 'bold' }}>Amount Spent</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {Object.entries(budgetItems).map(([category, details]) => (
+                    <TableRow key={category} sx={{ backgroundColor: '#ffffff' }}>
+                      <TableCell component="th" scope="row">
+                        {category}
+                      </TableCell>
+                      <TableCell align="right">{details.amountSet}</TableCell>
+                      <TableCell align="right">{details.amountSpent}</TableCell>
                     </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {Object.entries(budgetItems).map(([category, details]) => (
-                      <TableRow key={category}>
-                        <TableCell component="th" scope="row">
-                          {category}
-                        </TableCell>
-                        <TableCell align="right">{details.amountSet}</TableCell>
-                        <TableCell align="right">{details.amountSpent}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Stack>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+</Stack>
           </Grid>
         </Grid>
         <AddButton onClick={handleDialogOpen} />

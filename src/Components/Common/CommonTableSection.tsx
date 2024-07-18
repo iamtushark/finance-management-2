@@ -43,7 +43,7 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions, s
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', overflow: 'hidden', backgroundColor: 'white' }}>
         <Table>
           <TableHead>
             <TableRow>
