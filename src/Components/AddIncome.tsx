@@ -85,6 +85,7 @@ const AddIncomeDialog: React.FC<AddIncomeDialogProps> = ({ open, onClose }) => {
 									labelId="category-select-label"
 									value={selectedCategory}
 									onChange={handleCategoryChange}
+									label="Category"
 								>
 									{Object.values(incomeCategory).map(categoryKey => (
 										<MenuItem key={categoryKey} value={categoryKey}>

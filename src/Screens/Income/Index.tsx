@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from '@mui/material';
+import { Box, Container, Divider } from '@mui/material';
 import { CommonTableSection } from '../../Components/Common/CommonTableSection';
 import { Transaction, TransactionType } from '../../dbOperations/interfaces';
 import { useSelector } from 'react-redux';
@@ -31,12 +31,20 @@ const Incomes:React.FC = () => {
 
   return(
     <Container sx={{
-      p: 4,
+      p: 1,
     }}>
       <MiniDrawer />
+      <Box component="h1" sx={{ marginLeft: 6, marginTop: 2 }}>
+        Income
+      </Box>
+      <Divider sx={{ position: 'absolute', left: 0, right: 0, top: 64, border: '1px inset black', backgroundColor: '#ffffff' }} />
+      <Box component="h3" sx={{ marginLeft: 6 }}>
+        Summary
+      </Box>      
       <SummaryCard value={String(sum)} title='Income' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
       <CommonTableSection transactions={incomes} type={"Income"}/>
       <SingleLineChart data={amounts} label='Income' dates={dates}/>
+      <CommonTableSection transactions={incomes} type = {"Income"}/>
       <AddButton onClick={handleDialogOpen} />
         <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />
     </Container>

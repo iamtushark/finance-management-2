@@ -85,6 +85,7 @@ const AddExpenseDialog: React.FC<AddExpenseDialogProps> = ({ open, onClose }) =>
 									labelId="category-select-label"
 									value={selectedCategory}
 									onChange={handleCategoryChange}
+									label="Category"
 								>
 									{Object.keys(expensesCategory).map(categoryKey => (
 										<MenuItem key={categoryKey} value={categoryKey}>
