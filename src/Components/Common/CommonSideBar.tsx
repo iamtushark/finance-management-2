@@ -13,6 +13,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ContactlessIcon from '@mui/icons-material/Contactless';
 import { useNavigate } from 'react-router-dom';
+import ReceiptIcon  from '@mui/icons-material/Receipt';
 
 const drawerWidth = 60;
 
@@ -83,6 +84,15 @@ export default function MiniDrawer() {
             <ListItemButton onClick={() => navigate('/budget')}>
               <ListItemIcon>
                 <AccountBalanceWalletRoundedIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
+              </ListItemIcon>
+            </ListItemButton>
+          </Tooltip>
+        </ListItem>
+        <ListItem disablePadding>
+          <Tooltip title="transactions" placement="right" arrow>
+            <ListItemButton onClick={() => navigate('/transactions')}>
+              <ListItemIcon>
+                <ReceiptIcon sx={{ color: '#ffffff', fontSize: '24px' }} />
               </ListItemIcon>
             </ListItemButton>
           </Tooltip>
