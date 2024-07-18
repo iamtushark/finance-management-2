@@ -11,6 +11,7 @@ import AddIncomeDialog from '../../Components/AddIncome';
 import MiniDrawer from '../../Components/Common/CommonSideBar';
 import SingleLineChart from '../../Components/SingleLineChart';
 import { processTransactionsForSingleLineChart } from '../../utils/chartUtils';
+import CommonTopBar from '../../Components/Common/CommonTopBar';
 
 const Incomes:React.FC = () => {
   const trxns = useSelector(selectTransactions);
@@ -33,10 +34,8 @@ const Incomes:React.FC = () => {
     <Container sx={{
       p: 1,
     }}>
+      <CommonTopBar title="Income"/>
       <MiniDrawer />
-      <Box component="h1" sx={{ marginLeft: 6, marginTop: 2 }}>
-        Income
-      </Box>
       <Divider sx={{ position: 'absolute', left: 0, right: 0, top: 64, border: '1px inset black', backgroundColor: '#ffffff' }} />
       <Box component="h3" sx={{ marginLeft: 6 }}>
         Summary

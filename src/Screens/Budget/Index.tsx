@@ -25,6 +25,7 @@ import CommonBox from "../../Components/Common/CommonBox";
 import CommonCircularProgress from "../../Components/Common/CommonCircularProgress";
 import MiniDrawer from "../../Components/Common/CommonSideBar";
 import { selectExpenseSum } from "../../features/transaction/transactionSlice";
+import CommonTopBar from "../../Components/Common/CommonTopBar";
 
 const BudgetPage: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -66,9 +67,9 @@ const BudgetPage: React.FC = () => {
     );
   } else {
     return (
-      <Container sx={{ bgcolor: "white", borderRadius: '16px', padding: '12px' }}>
+      <Container sx={{ bgcolor: "white", borderRadius: '16px', padding: '12px', marginLeft:'72px' }}>
         <MiniDrawer />
-        <h1>Overview</h1>
+        <CommonTopBar title="Overview"/>
         <h3>Summary</h3>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
@@ -103,7 +104,7 @@ const BudgetPage: React.FC = () => {
         </Grid>
         <Grid container spacing={4} sx={{ mt: 4 }}>
           <Grid item xs={12}>
-            <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}>
+            <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px',}}>
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>

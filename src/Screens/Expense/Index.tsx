@@ -12,6 +12,7 @@ import MiniDrawer from '../../Components/Common/CommonSideBar';
 import SingleLineChart from '../../Components/SingleLineChart';
 import { processTransactionsForSingleLineChart } from '../../utils/chartUtils';
 import DualLineChart from '../../Components/DualLineChart';
+import CommonTopBar from '../../Components/Common/CommonTopBar';
 
 const Expenses:React.FC = () => {
   const trxns = useSelector(selectTransactions);
@@ -34,10 +35,8 @@ const Expenses:React.FC = () => {
     <Container sx={{
       p: 1,
     }}>
+      <CommonTopBar title="Expense"/>
       <MiniDrawer />
-      <Box component="h1" sx={{ marginLeft: 6, marginTop: 2 }}>
-        Expense  
-      </Box>
       <Divider sx={{ position: 'absolute', left: 0, right: 0, top: 64, border: '1px inset black', backgroundColor: '#ffffff' }} />
       <Box component="h3" sx={{ marginLeft: 6 }}>
         Summary
