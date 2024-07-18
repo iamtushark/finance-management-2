@@ -11,33 +11,7 @@ interface TransactionSliceState {
 }
 
 const initialState: TransactionSliceState = {
-  transactions: [
-  { id:1,    
-    type: 'Income',
-    amount: 20000,
-    category: 'Salary',
-    date: new Date(Date.now()),
-  },   
-  { id:2,    
-    type: 'Income',
-    amount: 20000,
-    category: 'Other',
-    date: new Date(Date.now()),
-  },  
-  { id:3,    
-    type: 'Expense',
-    amount: 200,
-    category: 'fine',
-    date: new Date(Date.now()),
-  },  
-  {   
-    id:4, 
-    type: 'Expense',
-    amount: 5000,
-    category: 'misc',
-    date: new Date(Date.now()),
-  },
-  ],
+  transactions: [],
   status: "idle",
 };
 
