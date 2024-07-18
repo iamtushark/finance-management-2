@@ -24,11 +24,11 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
   const budget = useAppSelector(selectBudget);
   const dispatch = useAppDispatch();
   const [budgetItems, setBudgetItems] = useState<Budget>(budget);
-  const user = useAppSelector(selectLoggedInUser)
+  const user = useAppSelector(selectLoggedInUser);
 
   const handleAmountSetChange = (
     category: string,
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setBudgetItems({
       ...budgetItems,
@@ -40,33 +40,34 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
   };
 
   const handleSubmit = () => {
-    if(user){
-    dispatch(setBudget({ userId: user, budget: budgetItems }));
-  }
-    else{
-      toast.error("Login before adding Budget")
+    if (user) {
+      dispatch(setBudget({ userId: user, budget: budgetItems }));
+    } else {
+      toast.error("Login before adding Budget");
     }
     onClose();
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>Add Budget</DialogTitle>
       <DialogContent>
         <form>
-          {Object.keys(expensesCategory).map(categoryKey => (
+          {Object.keys(expensesCategory).map((categoryKey) => (
             <Grid container spacing={2} alignItems="center" key={categoryKey}>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 {expensesCategory[categoryKey].name}
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <TextField
                   fullWidth
                   margin="normal"
                   label="Amount Set"
                   type="number"
                   value={budgetItems[categoryKey]?.amountSet || ""}
-                  onChange={event => handleAmountSetChange(categoryKey, event)}
+                  onChange={(event) =>
+                    handleAmountSetChange(categoryKey, event)
+                  }
                 />
               </Grid>
             </Grid>
@@ -74,7 +75,9 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
         </form>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose} color="primary">
+          Cancel
+        </Button>
         <Button onClick={handleSubmit} color="primary">
           Save
         </Button>
