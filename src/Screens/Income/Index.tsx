@@ -35,7 +35,7 @@ const Incomes:React.FC = () => {
     }}>
       <MiniDrawer />
       <SummaryCard value={String(sum)} title='Income' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
-      <CommonTableSection transactions={incomes}/>
+      <CommonTableSection transactions={incomes} type={"Income"}/>
       <SingleLineChart data={amounts} label='Income' dates={dates}/>
       <AddButton onClick={handleDialogOpen} />
         <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />

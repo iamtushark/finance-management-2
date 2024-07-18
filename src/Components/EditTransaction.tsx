@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
-import { Transaction } from '../dbOperations/interfaces';
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Transaction, TransactionType } from '../dbOperations/interfaces';
+import { expensesCategory, incomeCategory } from '../Constants/categories';
 
 interface EditTransactionDialogProps {
   open: boolean;
   onClose: () => void;
   transaction: Transaction;
   onSave: (updatedTransaction: Transaction) => void;
+  type : TransactionType
 }
 
-const EditTransactionDialog: React.FC<EditTransactionDialogProps> = ({ open, onClose, transaction, onSave }) => {
+const EditTransactionDialog: React.FC<EditTransactionDialogProps> = ({ open, onClose, transaction, onSave, type }) => {
   const [amount, setAmount] = useState<number>(transaction.amount);
   const [category, setCategory] = useState<string>(transaction.category);
   const [date, setDate] = useState<string>(transaction.date.toISOString().substring(0, 10));
@@ -37,13 +39,25 @@ const EditTransactionDialog: React.FC<EditTransactionDialogProps> = ({ open, onC
           onChange={(e) => setAmount(Number(e.target.value))}
           margin="normal"
         />
-        <TextField
-          label="Category"
-          fullWidth
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          margin="normal"
-        />
+        <FormControl fullWidth margin="normal">
+              <InputLabel id="category-select-label">Category</InputLabel>
+              <Select
+                labelId="category-select-label"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                {type === "Income" && Object.values(incomeCategory).map(categoryKey => (
+										<MenuItem key={categoryKey} value={categoryKey}>
+											{categoryKey}
+										</MenuItem>
+                ))}
+                {type === "Expense" &&Object.keys(expensesCategory).map(categoryKey => (
+										<MenuItem key={categoryKey} value={categoryKey}>
+											{expensesCategory[categoryKey].name}
+										</MenuItem>
+									))}
+              </Select>
+            </FormControl>
         <TextField
           label="Date"
           type="date"

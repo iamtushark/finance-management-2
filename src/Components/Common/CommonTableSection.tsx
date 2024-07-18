@@ -3,17 +3,21 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { Add as AddIcon, Edit as EditIcon } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { editTransaction, selectTransactions } from '../../features/transaction/transactionSlice';
-import { Transaction } from '../../dbOperations/interfaces';
+import { Transaction, TransactionType } from '../../dbOperations/interfaces';
 import EditTransactionDialog from '../EditTransaction';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectLoggedInUser } from '../../features/user/userSlice';
 import { toast } from 'react-toastify';
+import { BooleanSchema } from 'yup';
 
 interface CommonTableSectionProps {
   transactions: Transaction[];
+  showType? : boolean,
+  showEditButton? : boolean,
+  type : TransactionType
 }
 
-const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions }) => {
+const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions, showType = false, showEditButton = true, type }) => {
   const [open, setOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
   const dispatch = useAppDispatch();
@@ -46,7 +50,8 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions })
               <TableCell>Category</TableCell>
               <TableCell>Amount</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Edit</TableCell>
+              {!!showType && <TableCell>Type</TableCell>}
+              {!!showEditButton && <TableCell>Edit</TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -56,11 +61,12 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions })
                   <TableCell>{trxn.category}</TableCell>
                   <TableCell>{trxn.amount}</TableCell>
                   <TableCell>{new Date(trxn.date).toDateString()}</TableCell>
-                  <TableCell sx={{width: 10, maxHeight: 20}}>
+                  {!!showType && <TableCell>{trxn.type}</TableCell>}
+                  {!!showEditButton && <TableCell sx={{width: 10, maxHeight: 20}}>
                     <IconButton onClick={() => handleEditClick(trxn)}>
                       <EditIcon />
                     </IconButton>
-                  </TableCell>
+                  </TableCell>}
                 </TableRow>
               ))
             ) : (
@@ -76,6 +82,7 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions })
         transaction={selectedTransaction}
         onClose={handleClose}
         onSave={handleSave}
+        type={type}
       /> }
     </>
   );
