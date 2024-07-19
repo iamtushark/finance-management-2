@@ -74,10 +74,7 @@ const LoginPage: React.FC = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <CardActions>
-                    <CommonBlackSubmitButton
-                      loading={false}
-                      text="Log In"
-                    />
+                    <CommonBlackSubmitButton loading={false} text="Log In" />
                   </CardActions>
                 </Grid>
               </Grid>

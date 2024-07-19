@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const FeaturesSection: React.FC = () => (
   <section style={styles.container}>
@@ -12,7 +12,9 @@ const FeaturesSection: React.FC = () => (
       </div>
       <div style={styles.featureCard}>
         <h3>Detailed Reports</h3>
-        <p>Generate detailed financial reports to track your spending patterns.</p>
+        <p>
+          Generate detailed financial reports to track your spending patterns.
+        </p>
       </div>
     </div>
   </section>
@@ -20,28 +22,28 @@ const FeaturesSection: React.FC = () => (
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    padding: '2rem',
+    padding: "2rem",
   },
   title: {
-    textAlign: 'center',
-    fontSize: '2rem',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontSize: "2rem",
+    fontWeight: "bold",
   },
   highlight: {
-    color: 'orange',
+    color: "orange",
   },
   features: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '2rem',
-    marginTop: '2rem',
+    display: "flex",
+    justifyContent: "center",
+    gap: "2rem",
+    marginTop: "2rem",
   },
   featureCard: {
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    padding: '1rem',
-    textAlign: 'center',
-    width: '300px',
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    padding: "1rem",
+    textAlign: "center",
+    width: "300px",
   },
 };
 

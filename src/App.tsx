@@ -10,7 +10,6 @@ import { setUser, selectLoggedInUser } from "./features/user/userSlice";
 import { fetchTransactions } from "./features/transaction/transactionSlice";
 import { fetchBudget } from "./features/budget/budgetSlice";
 
-
 const App = () => {
   const user = useAppSelector(selectLoggedInUser);
   const dispatch = useAppDispatch();
@@ -20,9 +19,9 @@ const App = () => {
 
     const userId = localStorage.getItem(localStorageKeys.user);
     if (userId) {
-      dispatch(setUser(userId))
+      dispatch(setUser(userId));
       dispatch(fetchTransactions(userId));
-      dispatch(fetchBudget(userId))
+      dispatch(fetchBudget(userId));
       return;
     }
   }, [user]);

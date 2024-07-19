@@ -17,7 +17,7 @@ const CommonCard: React.FC<CommonCardProps> = ({ children, ...props }) => {
         backgroundColor: "rgba(255, 255, 255, 0.3)",
         backdropFilter: "blur(10px)",
         padding: "24px",
-        margin: '0px',
+        margin: "0px",
         // maxWidth: 800,
         // margin: "auto",
         // marginTop: 2,

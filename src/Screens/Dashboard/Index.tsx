@@ -188,18 +188,18 @@ const Dashboard: React.FC = () => {
         <div
           style={{
             padding: 1,
-            marginLeft: '0px',
-            paddingLeft: '0px',
-            backgroundColor: '#f9f9f9',
-            width: '100%',
+            marginLeft: "0px",
+            paddingLeft: "0px",
+            backgroundColor: "#f9f9f9",
+            width: "100%",
             // justifySelf: 'center',
           }}
         >
           <div
             style={{
-              maxWidth:'95%',
+              maxWidth: "95%",
               marginTop: "16px",
-              marginLeft: '72px',
+              marginLeft: "72px",
               // backgroundColor: "#f1f1f1f1",
               // marginBottom: '1.6rem',
               // padding: "0rem 1.6rem",
@@ -244,7 +244,7 @@ const Dashboard: React.FC = () => {
                 md={2}
                 // display="flex"
                 alignItems="center"
-              > 
+              >
                 <Button
                   variant="contained"
                   onClick={handleSave}
@@ -267,76 +267,79 @@ const Dashboard: React.FC = () => {
               </Grid>
             </Grid>
 
-
-          {/* <CommonTypography sx={{marginTop: '16px'}}>Summary</CommonTypography> */}
-          <h3 style={{marginBottom:'0px', marginTop: '16px'}}>Summary</h3>
-          <Grid container maxWidth={"100%"} sx={{margin: '0px', padding: '0px'}}>
+            {/* <CommonTypography sx={{marginTop: '16px'}}>Summary</CommonTypography> */}
+            <h3 style={{ marginBottom: "0px", marginTop: "16px" }}>Summary</h3>
+            <Grid
+              container
+              maxWidth={"100%"}
+              sx={{ margin: "0px", padding: "0px" }}
+            >
               {/* Summary Cards */}
-            <SummaryCard
-              title="Total Income"
-              value={String(filteredIncomeSum)}
-              icon={
-                <AttachMoneyIcon
-                sx={{ fontSize: 30, color: "primary.main", }}
-                />
-              }
-            />
-            <SummaryCard
-              title="Total Spent"
-              value={String(filteredExpenseSum)}
-              icon={
-                <SavingsIcon sx={{ fontSize: 30, color: "success.main" }} />
-              }
-            />
-            <SummaryCard
-              title="Available Balance"
-              value={String(filteredIncomeSum - filteredExpenseSum)}
-              icon={
-                <AccountBalance
-                sx={{ fontSize: 30, color: "success.main" }}
-                />
-              }
-            />
-          </Grid>
+              <SummaryCard
+                title="Total Income"
+                value={String(filteredIncomeSum)}
+                icon={
+                  <AttachMoneyIcon
+                    sx={{ fontSize: 30, color: "primary.main" }}
+                  />
+                }
+              />
+              <SummaryCard
+                title="Total Spent"
+                value={String(filteredExpenseSum)}
+                icon={
+                  <SavingsIcon sx={{ fontSize: 30, color: "success.main" }} />
+                }
+              />
+              <SummaryCard
+                title="Available Balance"
+                value={String(filteredIncomeSum - filteredExpenseSum)}
+                icon={
+                  <AccountBalance
+                    sx={{ fontSize: 30, color: "success.main" }}
+                  />
+                }
+              />
+            </Grid>
 
-          {/* <CommonTypography sx={{marginTop: '16px'}}>Reports</CommonTypography> */}
-          <h3 style={{marginTop: '16px'}}>Reports</h3>
-          {/* Pie Charts */}
-          <Grid
-            container
-            // spacing={2}
-            // justifyContent="center"
-            sx={{ m: "0px", p:'0px', marginTop:'2px', maxWidth: "95%" }}
-          >
-            <Grid item xs={12} sm={12} md={3} sx={{m:'0px', p:'0px'}}>
-              <CommonCard sx={{mx:'4px'}}>
-                <h3>Expenses</h3>
-                <PieChart
-                  type="expense"
-                  data={groupAndSumByCategory(filteredExpenseArray)}
-                />
-              </CommonCard>
+            {/* <CommonTypography sx={{marginTop: '16px'}}>Reports</CommonTypography> */}
+            <h3 style={{ marginTop: "16px" }}>Reports</h3>
+            {/* Pie Charts */}
+            <Grid
+              container
+              // spacing={2}
+              // justifyContent="center"
+              sx={{ m: "0px", p: "0px", marginTop: "2px", maxWidth: "95%" }}
+            >
+              <Grid item xs={12} sm={12} md={3} sx={{ m: "0px", p: "0px" }}>
+                <CommonCard sx={{ mx: "4px" }}>
+                  <h3>Expenses</h3>
+                  <PieChart
+                    type="expense"
+                    data={groupAndSumByCategory(filteredExpenseArray)}
+                  />
+                </CommonCard>
+              </Grid>
+              <Grid item xs={12} sm={12} md={3}>
+                <CommonCard sx={{ mx: "4px" }}>
+                  <h3>Income</h3>
+                  <PieChart
+                    type="income"
+                    data={groupAndSumByCategory(filteredIncomeArray)}
+                  />
+                </CommonCard>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <CommonCard sx={{ maxHeight: "63%", marginX: "4px" }}>
+                  <h3>Income and Expense</h3>
+                  <DualLineChart
+                    dates={dates}
+                    IncomeArray={incomeAmounts}
+                    ExpenseArray={expenseAmounts}
+                  />
+                </CommonCard>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={3}>
-              <CommonCard sx={{mx:'4px'}}>
-                <h3>Income</h3>
-                <PieChart
-                  type="income"
-                  data={groupAndSumByCategory(filteredIncomeArray)}
-                />
-              </CommonCard>
-            </Grid>
-            <Grid item xs={12} sm={12} md={6}>
-              <CommonCard sx={{maxHeight:'63%', marginX:'4px'}}>
-                <h3>Income and Expense</h3>
-                <DualLineChart
-                  dates={dates}
-                  IncomeArray={incomeAmounts}
-                  ExpenseArray={expenseAmounts}
-                />
-              </CommonCard>
-            </Grid>
-          </Grid>
           </div>
         </div>
       </div>

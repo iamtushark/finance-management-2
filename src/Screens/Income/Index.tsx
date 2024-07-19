@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
-import { Box, Container, Divider } from '@mui/material';
-import { CommonTableSection } from '../../Components/Common/CommonTableSection';
-import { Transaction, TransactionType } from '../../dbOperations/interfaces';
-import { useSelector } from 'react-redux';
-import { selectTransactions } from '../../features/transaction/transactionSlice';
-import { AccountBalance } from '@mui/icons-material';
-import SummaryCard from '../../Components/SummaryCard';
-import AddButton from '../../Components/Common/AddButton';
-import AddIncomeDialog from '../../Components/AddIncome';
-import MiniDrawer from '../../Components/Common/CommonSideBar';
-import SingleLineChart from '../../Components/SingleLineChart';
-import { processTransactionsForSingleLineChart } from '../../utils/chartUtils';
-import CommonTopBar from '../../Components/Common/CommonTopBar';
-import CommonCard from '../../Components/Common/CommonCard';
+import React, { useState } from "react";
+import { Box, Container, Divider } from "@mui/material";
+import { CommonTableSection } from "../../Components/Common/CommonTableSection";
+import { Transaction, TransactionType } from "../../dbOperations/interfaces";
+import { useSelector } from "react-redux";
+import { selectTransactions } from "../../features/transaction/transactionSlice";
+import { AccountBalance } from "@mui/icons-material";
+import SummaryCard from "../../Components/SummaryCard";
+import AddButton from "../../Components/Common/AddButton";
+import AddIncomeDialog from "../../Components/AddIncome";
+import MiniDrawer from "../../Components/Common/CommonSideBar";
+import SingleLineChart from "../../Components/SingleLineChart";
+import { processTransactionsForSingleLineChart } from "../../utils/chartUtils";
+import CommonTopBar from "../../Components/Common/CommonTopBar";
+import CommonCard from "../../Components/Common/CommonCard";
 
-const Incomes:React.FC = () => {
+const Incomes: React.FC = () => {
   const trxns = useSelector(selectTransactions);
-  const incomes = trxns.filter((trxn: Transaction)=>(trxn.type==='Income'));
+  const incomes = trxns.filter((trxn: Transaction) => trxn.type === "Income");
   let sum = 0;
-  incomes.forEach((income)=>{sum += income.amount});
+  incomes.forEach(income => {
+    sum += income.amount;
+  });
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleDialogOpen = () => {
@@ -29,38 +31,43 @@ const Incomes:React.FC = () => {
     setDialogOpen(false);
   };
 
-  const {amounts, dates} = processTransactionsForSingleLineChart(incomes)
+  const { amounts, dates } = processTransactionsForSingleLineChart(incomes);
 
-  return(
+  return (
     <div>
-      <CommonTopBar title="Income"/>
-      <div       
+      <CommonTopBar title="Income" />
+      <div
         style={{
           padding: 1,
-          marginLeft: '0px',
-          paddingLeft: '0px',
-          backgroundColor: '#f9f9f9',
-          width: '100%',
+          marginLeft: "0px",
+          paddingLeft: "0px",
+          backgroundColor: "#f9f9f9",
+          width: "100%",
         }}
       >
-        <div style={{
-            maxWidth: '94%',
-            marginTop: '16px',
-            marginLeft: '72px',
+        <div
+          style={{
+            maxWidth: "94%",
+            marginTop: "16px",
+            marginLeft: "72px",
           }}
-        >   
-          <SummaryCard value={String(sum)} title='Income' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
-          <CommonTableSection transactions={incomes} type={"Income"}/>
+        >
+          <SummaryCard
+            value={String(sum)}
+            title="Income"
+            icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}
+          />
+          <CommonTableSection transactions={incomes} type={"Income"} />
           <CommonCard>
-            <SingleLineChart data={amounts} label='Income' dates={dates}/>
+            <SingleLineChart data={amounts} label="Income" dates={dates} />
           </CommonCard>
-          <CommonTableSection transactions={incomes} type = {"Income"}/>
+          <CommonTableSection transactions={incomes} type={"Income"} />
           <AddButton onClick={handleDialogOpen} />
-            <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />
+          <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Incomes;

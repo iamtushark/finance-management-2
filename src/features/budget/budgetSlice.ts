@@ -6,7 +6,10 @@ import { Budget } from "../../dbOperations/interfaces";
 import { expensesCategory } from "../../Constants/categories";
 
 // for the db operations
-import { getWholeBudget, setCategoryBudget as setDbCategoryBudget } from "../../dbOperations/operations";
+import {
+  getWholeBudget,
+  setCategoryBudget as setDbCategoryBudget,
+} from "../../dbOperations/operations";
 import { setWholeBudget } from "../../dbOperations/operations";
 
 export interface budgetSliceState {
@@ -41,10 +44,7 @@ export const budgetSlice = createAppSlice({
         pending: state => {
           state.status = "loading";
         },
-        fulfilled: (
-          state,
-          action: PayloadAction<{ budget: Budget}>,
-        ) => {
+        fulfilled: (state, action: PayloadAction<{ budget: Budget }>) => {
           state.status = "succeeded";
           state.budget = action.payload.budget;
         },
@@ -124,12 +124,14 @@ export const budgetSlice = createAppSlice({
     selectBudget: state => state.budget,
     selectCategoryBudget: (state: budgetSliceState, category: string) =>
       state.budget[category],
-    selectBudgetStatus : state => state.status
+    selectBudgetStatus: state => state.status,
   },
 });
 
 // Action creators are generated for each case reducer function.
-export const { setBudget, setCategoryBudget, fetchBudget } = budgetSlice.actions;
+export const { setBudget, setCategoryBudget, fetchBudget } =
+  budgetSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
-export const { selectBudget, selectCategoryBudget, selectBudgetStatus } = budgetSlice.selectors;
+export const { selectBudget, selectCategoryBudget, selectBudgetStatus } =
+  budgetSlice.selectors;
