@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, MenuItem } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { addNewTransaction } from '../../features/transaction/transactionSlice';
-import { TransactionType } from '../../dbOperations/interfaces';
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  TextField,
+  MenuItem,
+} from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addNewTransaction } from "../../features/transaction/transactionSlice";
+import { TransactionType } from "../../dbOperations/interfaces";
 
 interface CommonAddTransactionProps {
   open: boolean;
   handleClose: () => void;
 }
 
-const CommonAddTransaction: React.FC<CommonAddTransactionProps> = ({ open, handleClose }) => {
+const CommonAddTransaction: React.FC<CommonAddTransactionProps> = ({
+  open,
+  handleClose,
+}) => {
   const dispatch = useDispatch();
-  const [type, setType] = useState<TransactionType>('Expense');
+  const [type, setType] = useState<TransactionType>("Expense");
   const [amount, setAmount] = useState<number>(0);
-  const [description, setDescription] = useState<string>('');
+  const [description, setDescription] = useState<string>("");
 
   const handleSubmit = () => {
     const id = Math.random().toString(36).substring(2, 9);
@@ -35,7 +46,7 @@ const CommonAddTransaction: React.FC<CommonAddTransactionProps> = ({ open, handl
           select
           label="Type"
           value={type}
-          onChange={(e) => setType(e.target.value as TransactionType)}
+          onChange={e => setType(e.target.value as TransactionType)}
           fullWidth
           margin="normal"
         >
@@ -46,14 +57,14 @@ const CommonAddTransaction: React.FC<CommonAddTransactionProps> = ({ open, handl
           label="Amount"
           type="number"
           value={amount}
-          onChange={(e) => setAmount(parseFloat(e.target.value))}
+          onChange={e => setAmount(parseFloat(e.target.value))}
           fullWidth
           margin="normal"
         />
         <TextField
           label="Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={e => setDescription(e.target.value)}
           fullWidth
           margin="normal"
         />

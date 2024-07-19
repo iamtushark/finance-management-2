@@ -1,4 +1,8 @@
-import { getTransactions, addTransaction, editTransaction as editDBTransaction} from "../../dbOperations/operations";
+import {
+  getTransactions,
+  addTransaction,
+  editTransaction as editDBTransaction,
+} from "../../dbOperations/operations";
 import { TransactionType, Transaction } from "../../dbOperations/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createAppSlice } from "../../app/createAppSlice";
@@ -121,9 +125,16 @@ export const transactionSlice = createAppSlice({
   },
 });
 
-export const { fetchTransactions, editTransaction ,addNewTransaction } =
+export const { fetchTransactions, editTransaction, addNewTransaction } =
   transactionSlice.actions;
 
-export const { selectTransactions, selectStatus, selectIncomeTransactions, selectExpenseTransactions, selectExpenseSum, selectIncomeSum } = transactionSlice.selectors;
+export const {
+  selectTransactions,
+  selectStatus,
+  selectIncomeTransactions,
+  selectExpenseTransactions,
+  selectExpenseSum,
+  selectIncomeSum,
+} = transactionSlice.selectors;
 
 export default transactionSlice.reducer;

@@ -43,6 +43,9 @@ import CommonCircularProgress from "../../Components/Common/CommonCircularProgre
 import CommonBox from "../../Components/Common/CommonBox";
 import CommonCard from "../../Components/Common/CommonCard";
 import CommonTopBar from "../../Components/Common/CommonTopBar";
+import { padding } from "@mui/system";
+import CommonHeadingTypography from "../../Components/Common/CommonHeadingTypography";
+import CommonTypography from "../../Components/Common/CommonTypography";
 
 const Dashboard: React.FC = () => {
   const incomeArray = useAppSelector(selectIncomeTransactions);
@@ -178,33 +181,41 @@ const Dashboard: React.FC = () => {
   } else {
     return (
       <div>
+        {/* style={{overflow: 'hidden', maxWidth:'100%', maxHeight:'100%'}} */}
         <CommonTopBar title="Overview" />
 
         {/* <Container sx={{ bgcolor: "white", border: '1px ', borderRadius: '16px', padding: '12px' }}> */}
-        <Container
-          sx={{
-            p: 1,
-            marginX: "48px",
+        <div
+          style={{
+            padding: 1,
+            marginLeft: "0px",
+            paddingLeft: "0px",
+            backgroundColor: "#f9f9f9",
+            width: "100%",
+            // justifySelf: 'center',
           }}
         >
           <div
             style={{
+              maxWidth: "95%",
+              marginTop: "16px",
+              marginLeft: "72px",
               // backgroundColor: "#f1f1f1f1",
               // marginBottom: '1.6rem',
-              padding: "0rem 1.6rem",
-              paddingBottom: "2rem",
-              marginBottom: "2rem",
-              minWidth: "100%",
-              maxWidth: "100%",
-              overflow: "hidden",
-              maxHeight: "5rem",
+              // padding: "0rem 1.6rem",
+              // paddingBottom: "2rem",
+              // marginBottom: "2rem",
+              // minWidth: "100%",
+              // maxWidth: "100%",
+              // overflow: "hidden",
+              // maxHeight: "5rem",
             }}
           >
             <Grid
               container
               spacing={2}
-              justifyContent="center"
-              alignItems="center"
+              // justifyContent="center"
+              // alignItems="center"
               sx={{ minWidth: "100%", maxWidth: "100%" }}
             >
               <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -231,7 +242,7 @@ const Dashboard: React.FC = () => {
                 xs={10}
                 sm={6}
                 md={2}
-                display="flex"
+                // display="flex"
                 alignItems="center"
               >
                 <Button
@@ -255,13 +266,15 @@ const Dashboard: React.FC = () => {
                 </Button>
               </Grid>
             </Grid>
-          </div>
 
-          <Grid container spacing={4} justifyContent="center"></Grid>
-
-          <Grid container spacing={4} justifyContent="center" maxWidth={"100%"}>
-            {/* Summary Cards */}
-            <Grid item xs={10} sm={6} md={3}>
+            {/* <CommonTypography sx={{marginTop: '16px'}}>Summary</CommonTypography> */}
+            <h3 style={{ marginBottom: "0px", marginTop: "16px" }}>Summary</h3>
+            <Grid
+              container
+              maxWidth={"100%"}
+              sx={{ margin: "0px", padding: "0px" }}
+            >
+              {/* Summary Cards */}
               <SummaryCard
                 title="Total Income"
                 value={String(filteredIncomeSum)}
@@ -271,8 +284,6 @@ const Dashboard: React.FC = () => {
                   />
                 }
               />
-            </Grid>
-            <Grid item xs={10} sm={6} md={3}>
               <SummaryCard
                 title="Total Spent"
                 value={String(filteredExpenseSum)}
@@ -280,8 +291,6 @@ const Dashboard: React.FC = () => {
                   <SavingsIcon sx={{ fontSize: 30, color: "success.main" }} />
                 }
               />
-            </Grid>
-            <Grid item xs={10} sm={6} md={3}>
               <SummaryCard
                 title="Available Balance"
                 value={String(filteredIncomeSum - filteredExpenseSum)}
@@ -292,45 +301,47 @@ const Dashboard: React.FC = () => {
                 }
               />
             </Grid>
-          </Grid>
 
-          {/* Pie Charts */}
-          <Grid
-            container
-            spacing={4}
-            justifyContent="center"
-            sx={{ m: "4px", maxWidth: "100%" }}
-          >
-            <Grid item xs={10} sm={6} md={5}>
-              <CommonCard>
-                <h3>Expenses</h3>
-                <PieChart
-                  type="expense"
-                  data={groupAndSumByCategory(filteredExpenseArray)}
-                />
-              </CommonCard>
+            {/* <CommonTypography sx={{marginTop: '16px'}}>Reports</CommonTypography> */}
+            <h3 style={{ marginTop: "16px" }}>Reports</h3>
+            {/* Pie Charts */}
+            <Grid
+              container
+              // spacing={2}
+              // justifyContent="center"
+              sx={{ m: "0px", p: "0px", marginTop: "2px", maxWidth: "95%" }}
+            >
+              <Grid item xs={12} sm={12} md={3} sx={{ m: "0px", p: "0px" }}>
+                <CommonCard sx={{ mx: "4px" }}>
+                  <h3>Expenses</h3>
+                  <PieChart
+                    type="expense"
+                    data={groupAndSumByCategory(filteredExpenseArray)}
+                  />
+                </CommonCard>
+              </Grid>
+              <Grid item xs={12} sm={12} md={3}>
+                <CommonCard sx={{ mx: "4px" }}>
+                  <h3>Income</h3>
+                  <PieChart
+                    type="income"
+                    data={groupAndSumByCategory(filteredIncomeArray)}
+                  />
+                </CommonCard>
+              </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <CommonCard sx={{ maxHeight: "63%", marginX: "4px" }}>
+                  <h3>Income and Expense</h3>
+                  <DualLineChart
+                    dates={dates}
+                    IncomeArray={incomeAmounts}
+                    ExpenseArray={expenseAmounts}
+                  />
+                </CommonCard>
+              </Grid>
             </Grid>
-            <Grid item xs={10} sm={6} md={5}>
-              <CommonCard>
-                <h3>Income</h3>
-                <PieChart
-                  type="income"
-                  data={groupAndSumByCategory(filteredIncomeArray)}
-                />
-              </CommonCard>
-            </Grid>
-            <Grid item xs={12} sm={6} md={6}>
-              <CommonCard>
-                <h3>Income and Expense</h3>
-                <DualLineChart
-                  dates={dates}
-                  IncomeArray={incomeAmounts}
-                  ExpenseArray={expenseAmounts}
-                />
-              </CommonCard>
-            </Grid>
-          </Grid>
-        </Container>
+          </div>
+        </div>
       </div>
     );
   }

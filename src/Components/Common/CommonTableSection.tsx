@@ -1,27 +1,45 @@
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
-import { Add as AddIcon, Edit as EditIcon } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
-import { editTransaction, selectTransactions } from '../../features/transaction/transactionSlice';
-import { Transaction, TransactionType } from '../../dbOperations/interfaces';
-import EditTransactionDialog from '../EditTransaction';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectLoggedInUser } from '../../features/user/userSlice';
-import { toast } from 'react-toastify';
-import { BooleanSchema } from 'yup';
+import React, { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+} from "@mui/material";
+import { Add as AddIcon, Edit as EditIcon } from "@mui/icons-material";
+import { useSelector } from "react-redux";
+import {
+  editTransaction,
+  selectTransactions,
+} from "../../features/transaction/transactionSlice";
+import { Transaction, TransactionType } from "../../dbOperations/interfaces";
+import EditTransactionDialog from "../EditTransaction";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { selectLoggedInUser } from "../../features/user/userSlice";
+import { toast } from "react-toastify";
+import { BooleanSchema } from "yup";
 
 interface CommonTableSectionProps {
   transactions: Transaction[];
-  showType? : boolean,
-  showEditButton? : boolean,
-  type : TransactionType
+  showType?: boolean;
+  showEditButton?: boolean;
+  type: TransactionType;
 }
 
-const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions, showType = false, showEditButton = true, type }) => {
+const CommonTableSection: React.FC<CommonTableSectionProps> = ({
+  transactions,
+  showType = false,
+  showEditButton = true,
+  type,
+}) => {
   const [open, setOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectLoggedInUser)
+  const user = useAppSelector(selectLoggedInUser);
 
   const handleEditClick = (transaction: Transaction) => {
     setSelectedTransaction(transaction);
@@ -34,16 +52,30 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions, s
   };
 
   const handleSave = (updatedTransaction: Transaction) => {
-    if(user){
-    dispatch(editTransaction({userId : user, updatedTransaction: updatedTransaction, transactionId : updatedTransaction.id}))}
-    else{
-      toast.error("Log In before editing transaction")
+    if (user) {
+      dispatch(
+        editTransaction({
+          userId: user,
+          updatedTransaction: updatedTransaction,
+          transactionId: updatedTransaction.id,
+        }),
+      );
+    } else {
+      toast.error("Log In before editing transaction");
     }
   };
 
   return (
     <>
-      <TableContainer component={Paper} sx={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', overflow: 'hidden', backgroundColor: 'white' }}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          borderRadius: "8px",
+          overflow: "hidden",
+          backgroundColor: "white",
+        }}
+      >
         <Table>
           <TableHead>
             <TableRow>
@@ -56,40 +88,49 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({ transactions, s
           </TableHead>
           <TableBody>
             {transactions.length > 0 ? (
-              transactions.map((trxn) => (
+              transactions.map(trxn => (
                 <TableRow key={trxn.id}>
                   <TableCell>{trxn.category}</TableCell>
                   <TableCell>{trxn.amount}</TableCell>
                   <TableCell>{new Date(trxn.date).toDateString()}</TableCell>
                   {!!showType && <TableCell>{trxn.type}</TableCell>}
-                  {!!showEditButton && <TableCell sx={{width: 10, maxHeight: 20}}>
-                    <IconButton onClick={() => handleEditClick(trxn)}>
-                      <EditIcon />
-                    </IconButton>
-                  </TableCell>}
+                  {!!showEditButton && (
+                    <TableCell sx={{ width: 10, maxHeight: 20 }}>
+                      <IconButton onClick={() => handleEditClick(trxn)}>
+                        <EditIcon />
+                      </IconButton>
+                    </TableCell>
+                  )}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={4} align="center">No data</TableCell>
+                <TableCell colSpan={4} align="center">
+                  No data
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-      {selectedTransaction && <EditTransactionDialog
-        open={open}
-        transaction={selectedTransaction}
-        onClose={handleClose}
-        onSave={handleSave}
-        type={type}
-      /> }
+      {selectedTransaction && (
+        <EditTransactionDialog
+          open={open}
+          transaction={selectedTransaction}
+          onClose={handleClose}
+          onSave={handleSave}
+          type={type}
+        />
+      )}
     </>
   );
 };
 
 const AddButton = () => (
-  <IconButton color="primary" style={{ position: 'fixed', bottom: 16, right: 16 }}>
+  <IconButton
+    color="primary"
+    style={{ position: "fixed", bottom: 16, right: 16 }}
+  >
     <AddIcon fontSize="large" />
   </IconButton>
 );

@@ -28,7 +28,7 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
 
   const handleAmountSetChange = (
     category: string,
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setBudgetItems({
       ...budgetItems,
@@ -53,7 +53,7 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
       <DialogTitle>Add Budget</DialogTitle>
       <DialogContent>
         <form>
-          {Object.keys(expensesCategory).map((categoryKey) => (
+          {Object.keys(expensesCategory).map(categoryKey => (
             <Grid container spacing={2} alignItems="center" key={categoryKey}>
               <Grid item xs={6}>
                 {expensesCategory[categoryKey].name}
@@ -65,9 +65,7 @@ const AddBudgetDialog: React.FC<AddBudgetDialogProps> = ({ open, onClose }) => {
                   label="Amount Set"
                   type="number"
                   value={budgetItems[categoryKey]?.amountSet || ""}
-                  onChange={(event) =>
-                    handleAmountSetChange(categoryKey, event)
-                  }
+                  onChange={event => handleAmountSetChange(categoryKey, event)}
                 />
               </Grid>
             </Grid>

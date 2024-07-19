@@ -97,10 +97,10 @@ export const getTransactions = async (
 export const editTransaction = async (
   userId: string,
   transactionId: string,
-  updatedTransaction: Partial<Transaction>
+  updatedTransaction: Partial<Transaction>,
 ): Promise<Transaction[]> => {
   let transactions = await localforage.getItem<DBTransactions>(
-    DBKeys.transactions
+    DBKeys.transactions,
   );
 
   if (!transactions) {
@@ -114,7 +114,7 @@ export const editTransaction = async (
 
   const userTransactions = transactions[userId];
   const transactionIndex = userTransactions.findIndex(
-    (transaction) => transaction.id === transactionId
+    transaction => transaction.id === transactionId,
   );
 
   if (transactionIndex === -1) {
@@ -127,7 +127,7 @@ export const editTransaction = async (
   };
 
   await localforage.setItem(DBKeys.transactions, transactions);
-  return userTransactions
+  return userTransactions;
 };
 
 // Budget Operations

@@ -9,7 +9,7 @@ import HomePage from "../Screens/Home/Home";
 const PublicRoutes: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage/>}/>
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
     </Routes>

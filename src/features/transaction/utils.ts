@@ -3,7 +3,7 @@ import { Transaction } from "../../dbOperations/interfaces";
 export const getDateFilteredIncomeTransactions = (
   transactions: Transaction[],
   startDate: string,
-  endDate: string
+  endDate: string,
 ): Transaction[] => {
   return transactions.filter(transaction => {
     const transactionDate = new Date(transaction.date);
@@ -18,7 +18,7 @@ export const getDateFilteredIncomeTransactions = (
 export const getDateFilteredExpenseTransactions = (
   transactions: Transaction[],
   startDate: string,
-  endDate: string
+  endDate: string,
 ): Transaction[] => {
   return transactions.filter(transaction => {
     const transactionDate = new Date(transaction.date);
@@ -33,7 +33,7 @@ export const getDateFilteredExpenseTransactions = (
 export const getDateFilteredIncomeSum = (
   transactions: Transaction[],
   startDate: string,
-  endDate: string
+  endDate: string,
 ): number => {
   return transactions
     .filter(transaction => {
@@ -50,7 +50,7 @@ export const getDateFilteredIncomeSum = (
 export const getDateFilteredExpenseSum = (
   transactions: Transaction[],
   startDate: string,
-  endDate: string
+  endDate: string,
 ): number => {
   return transactions
     .filter(transaction => {
