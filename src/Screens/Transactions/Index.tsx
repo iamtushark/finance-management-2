@@ -10,17 +10,25 @@ const TransactionPage:React.FC = () => {
   const trxns = useSelector(selectTransactions);
 
   return(
-    <>
+    <div>
     <CommonTopBar title="Transactions"/>
-    <Container sx={{
-      p: 1,
+    <div style={{
+      padding: 1,
+      marginLeft: '0px',
+      paddingLeft: '0px',
+      backgroundColor: '#f9f9f9',
+      width: '100%',
     }}>
-
-      <Container sx={{p:4} }>
+      <div style={{
+            maxWidth: '94%',
+            marginTop: '16px',
+            marginLeft: '72px',
+        }}
+      >  
         <CommonTableSection transactions={trxns} showType={true} showEditButton={false} type='Expense' />
-      </Container>
-    </Container>
-    </>
+      </div>
+    </div>
+    </div>
   );
 }
 

@@ -32,23 +32,34 @@ const Incomes:React.FC = () => {
   const {amounts, dates} = processTransactionsForSingleLineChart(incomes)
 
   return(
-    <>
-    <CommonTopBar title="Income"/>
-    <Container sx={{
-      p: 1,
-      // marginX: '48px',
-    }}>
-           
-      <SummaryCard value={String(sum)} title='Income' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
-      <CommonTableSection transactions={incomes} type={"Income"}/>
-      <CommonCard>
-        <SingleLineChart data={amounts} label='Income' dates={dates}/>
-      </CommonCard>
-      <CommonTableSection transactions={incomes} type = {"Income"}/>
-      <AddButton onClick={handleDialogOpen} />
-        <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />
-    </Container>
-    </>
+    <div>
+      <CommonTopBar title="Income"/>
+      <div       
+        style={{
+          padding: 1,
+          marginLeft: '0px',
+          paddingLeft: '0px',
+          backgroundColor: '#f9f9f9',
+          width: '100%',
+        }}
+      >
+        <div style={{
+            maxWidth: '94%',
+            marginTop: '16px',
+            marginLeft: '72px',
+          }}
+        >   
+          <SummaryCard value={String(sum)} title='Income' icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}/>
+          <CommonTableSection transactions={incomes} type={"Income"}/>
+          <CommonCard>
+            <SingleLineChart data={amounts} label='Income' dates={dates}/>
+          </CommonCard>
+          <CommonTableSection transactions={incomes} type = {"Income"}/>
+          <AddButton onClick={handleDialogOpen} />
+            <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />
+        </div>
+      </div>
+    </div>
   );
 }
 

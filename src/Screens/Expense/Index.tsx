@@ -33,13 +33,21 @@ const Expenses:React.FC = () => {
   const {amounts, dates} = processTransactionsForSingleLineChart(expenses)
 
   return(
-    <>
+    <div>
     <CommonTopBar title="Expense"/>
-    <Container sx={{
-      p: 1,
-      alignItems: 'left'
-      // al
+    <div style={{
+      padding: 1,
+      marginLeft: '0px',
+      paddingLeft: '0px',
+      backgroundColor: '#f9f9f9',
+      width: '100%',
     }}>
+      <div style={{
+            maxWidth: '94%',
+            marginTop: '16px',
+            marginLeft: '72px',
+        }}
+      >  
       <Box component="h3" sx={{ mx: 0}}>
         Summary
       </Box>
@@ -60,8 +68,9 @@ const Expenses:React.FC = () => {
       <CommonTableSection transactions={expenses} type='Expense'/>
       <AddButton onClick={handleDialogOpen} />
         <AddExpenseDialog open={dialogOpen} onClose={handleDialogClose} />
-    </Container>
-    </>
+        </div>
+    </div>
+    </div>
   );
 }
 

@@ -71,7 +71,21 @@ const BudgetPage: React.FC = () => {
     return (
     <>
       <CommonTopBar title="Overview"/>
-      <Container>
+      <div       
+        style={{
+          padding: 1,
+          marginLeft: '0px',
+          paddingLeft: '0px',
+          backgroundColor: '#f9f9f9',
+          width: '100%',
+        }}
+      >
+        <div style={{
+            maxWidth: '94%',
+            marginTop: '16px',
+            marginLeft: '72px',
+          }}
+        >  
         <h3>Summary</h3>
         <Grid container spacing={2}>
           <Grid item>
@@ -132,7 +146,8 @@ const BudgetPage: React.FC = () => {
         </Grid>
         <AddButton onClick={handleDialogOpen} />
         <AddBudgetDialog open={dialogOpen} onClose={handleDialogClose} />
-      </Container>
+      </div>
+      </div>
     </>
     );
   }
