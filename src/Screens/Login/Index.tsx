@@ -19,6 +19,9 @@ import { useAppDispatch } from "../../app/hooks";
 import { logUser } from "../../dbOperations/operations";
 import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
+import { fontStyle } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import CommonTypography from "../../Components/Common/CommonTypography";
 
 const LoginPage: React.FC = () => {
   const {
@@ -31,6 +34,8 @@ const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [error, setError] = useState<string | null>(null);
   const navigateAfterLogin = useNavigateAfterLogin();
+  const navigate = useNavigate();
+  const navigateToSignup= ()=>navigate('/signup');
 
   const onSubmit = async (data: LoginFormInterface) => {
     try {
@@ -47,6 +52,9 @@ const LoginPage: React.FC = () => {
 
   return (
     <CommonFormBox>
+      <CommonTypography variant="h3"
+        style={{marginBottom: '4vh'}
+        }>Fake.Expense.App</CommonTypography>
       <CommonContainer>
         <CommonCard>
           <CommonCardContent>
@@ -80,6 +88,10 @@ const LoginPage: React.FC = () => {
               </Grid>
             </Stack>
             {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
+            <p 
+              onClick={()=>navigateToSignup()} 
+              style={{cursor: 'pointer', color: 'blue', textDecoration: 'underline' }
+            }>Don't have an account? Sign up</p>
           </CommonCardContent>
         </CommonCard>
       </CommonContainer>

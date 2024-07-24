@@ -21,9 +21,14 @@ import { useAppDispatch } from "../../app/hooks";
 import { addUser } from "../../dbOperations/operations";
 import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
+import CommonTypography from "../../Components/Common/CommonTypography";
+
 
 const SignupPage: React.FC = () => {
+
   const navigate = useNavigate();
+  const navigateToSignin = ()=> navigate('/login');
+
   const {
     control,
     handleSubmit,
@@ -53,6 +58,9 @@ const SignupPage: React.FC = () => {
 
   return (
     <CommonFormBox>
+      <CommonTypography variant="h3"
+        style={{marginBottom: '4vh'}
+        }>Fake.Expense.App</CommonTypography>
       <CommonContainer>
         <CommonCard>
           <CommonCardContent>
@@ -106,6 +114,10 @@ const SignupPage: React.FC = () => {
               </Grid>
             </Stack>
             {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
+            <p 
+              onClick={()=>navigateToSignin()}
+                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }
+              }>Already have an account? Sign in</p>
           </CommonCardContent>
         </CommonCard>
       </CommonContainer>
