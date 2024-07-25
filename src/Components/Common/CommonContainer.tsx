@@ -12,9 +12,11 @@ const CommonContainer: React.FC<CommonContainerProps> = ({
       {...props}
       // maxWidth="lg" // Limiting the container's width to the viewport size
       sx={{
-        backgroundColor: "#f0f0f0",
+        // backgroundColor: "#f0f0f0",
         padding: 0, // Reset padding
         margin: 0, // Reset margin
+        boxShadow: 0,
+        elevation: 0,
 
         width: "100%",
         ...props.sx,

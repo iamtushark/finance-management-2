@@ -19,6 +19,11 @@ import { useAppDispatch } from "../../app/hooks";
 import { logUser } from "../../dbOperations/operations";
 import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
+import { fontStyle } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import CommonTypography from "../../Components/Common/CommonTypography";
+import CommonBox from "../../Components/Common/CommonBox";
+import CommonFooter from "../../Components/Common/CommonFooter";
 
 const LoginPage: React.FC = () => {
   const {
@@ -31,6 +36,8 @@ const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const [error, setError] = useState<string | null>(null);
   const navigateAfterLogin = useNavigateAfterLogin();
+  const navigate = useNavigate();
+  const navigateToSignup= ()=>navigate('/signup');
 
   const onSubmit = async (data: LoginFormInterface) => {
     try {
@@ -46,44 +53,58 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <CommonFormBox>
-      <CommonContainer>
-        <CommonCard>
-          <CommonCardContent>
-            <CommonHeadingTypography>Login</CommonHeadingTypography>
-            <Stack
-              component="form"
-              onSubmit={handleSubmit(onSubmit)}
-              sx={{ flexGrow: 1 }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <CommonTextField
-                    name="username"
-                    control={control}
-                    label="Username"
-                  />
+    <>
+    <CommonBox sx={{flexDirection:'column'}}>
+      <CommonTypography variant="h3"
+      sx={{margin: '4vh auto', fontWeight:700}
+          }>Fake.Expense.App</CommonTypography>
+      <CommonFormBox>
+        <CommonContainer>
+          <CommonCard>
+            <CommonCardContent>
+              <CommonHeadingTypography>Login</CommonHeadingTypography>
+              <Stack
+                component="form"
+                onSubmit={handleSubmit(onSubmit)}
+                sx={{ flexGrow: 1 }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <CommonTextField
+                      name="username"
+                      control={control}
+                      label="Username"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CommonTextField
+                      name="password"
+                      control={control}
+                      label="Password"
+                      type="password"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CardActions>
+                      <CommonBlackSubmitButton loading={false} text="Log In" />
+                    </CardActions>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <CommonTextField
-                    name="password"
-                    control={control}
-                    label="Password"
-                    type="password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <CardActions>
-                    <CommonBlackSubmitButton loading={false} text="Log In" />
-                  </CardActions>
-                </Grid>
-              </Grid>
-            </Stack>
-            {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
-          </CommonCardContent>
-        </CommonCard>
-      </CommonContainer>
-    </CommonFormBox>
+              </Stack>
+              {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
+              <p>Don't have an account?&nbsp; 
+                <span 
+                  onClick={()=>navigateToSignup()} 
+                  style={{cursor: 'pointer', color: 'blue', textDecoration: 'underline' }
+                }>Sign up</span>
+              </p>
+            </CommonCardContent>
+          </CommonCard>
+        </CommonContainer>
+      </CommonFormBox>
+    </CommonBox>
+    {/* <CommonFooter/> */}
+    </>
   );
 };
 

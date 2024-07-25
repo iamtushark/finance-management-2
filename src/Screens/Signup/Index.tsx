@@ -21,9 +21,16 @@ import { useAppDispatch } from "../../app/hooks";
 import { addUser } from "../../dbOperations/operations";
 import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
+import CommonTypography from "../../Components/Common/CommonTypography";
+import CommonBox from "../../Components/Common/CommonBox";
+import CommonFooter from "../../Components/Common/CommonFooter";
+
 
 const SignupPage: React.FC = () => {
+
   const navigate = useNavigate();
+  const navigateToSignin = ()=> navigate('/login');
+
   const {
     control,
     handleSubmit,
@@ -52,6 +59,11 @@ const SignupPage: React.FC = () => {
   };
 
   return (
+    <>
+    <CommonBox sx={{flexDirection: 'column', backgroundImage: '../../utils/bg.jpg'}}>
+    <CommonTypography variant="h3"
+    style={{margin: '4vh auto', fontWeight: 700}
+        }>Fake.Expense.App</CommonTypography>
     <CommonFormBox>
       <CommonContainer>
         <CommonCard>
@@ -106,10 +118,20 @@ const SignupPage: React.FC = () => {
               </Grid>
             </Stack>
             {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
+            <p>Already have an account?&nbsp;
+            <span
+              onClick={()=>navigateToSignin()}
+                style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }
+              }>Sign in</span>
+            </p>
           </CommonCardContent>
         </CommonCard>
       </CommonContainer>
     </CommonFormBox>
+    {/* <CommonFooter/> */}
+    </CommonBox>
+    </>
+
   );
 };
 
