@@ -182,7 +182,7 @@ const Dashboard: React.FC = () => {
     return (
       <>
         <CommonTopBar title="Overview" />
-      <CommonBox sx={{flexDirection: 'column'}}>
+      <CommonBox sx={{flexDirection: 'column', padding: '2.4vw'}}>
 
         {/* style={{overflow: 'hidden', maxWidth:'100%', maxHeight:'100%'}} */}
 
