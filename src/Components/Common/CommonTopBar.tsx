@@ -10,20 +10,19 @@ const CommonTopBar: React.FC<{ title: string }> = ({ title }) => {
         sx={{
           bgcolor: "#111827",
           color: "white",
-          height: "56px",
-          display: "flex",
+          height: "8vh",
+          display: "block",
           position: "relative",
-          paddingTop: "2px",
+          paddingTop: "2vh",
         }}
       >
-        <MiniDrawer />
         <div
           style={{
             marginLeft: "16px",
             marginTop: 4,
           }}
         >
-          <Typography variant="h4">{title}</Typography>
+          <Typography variant="h4" sx={{fontWeight: 700}}>{title}</Typography>
         </div>
         {/* <Divider sx={{
                     position: 'absolute',
