@@ -116,10 +116,12 @@ const SignupPage: React.FC = () => {
               </Grid>
             </Stack>
             {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
-            <p 
+            <p>Already have an account?&nbsp;
+            <span
               onClick={()=>navigateToSignin()}
                 style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }
-              }>Already have an account? Sign in</p>
+              }>Sign in</span>
+            </p>
           </CommonCardContent>
         </CommonCard>
       </CommonContainer>
