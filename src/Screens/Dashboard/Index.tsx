@@ -31,6 +31,7 @@ import {
 import { toast } from "react-toastify";
 import {
   groupAndSumByCategory,
+  processCategoryDataForDualBarChart,
   processTransactionsForDualLineChart,
 } from "../../utils/chartUtils";
 import CommonCircularProgress from "../../Components/Common/CommonCircularProgress";
@@ -39,12 +40,14 @@ import CommonTopBar from "../../Components/Common/CommonTopBar";
 import CommonHeadingTypography from "../../Components/Common/CommonHeadingTypography";
 import DualLineChart from "../../Components/DualLineChart";
 import DualBarChart from "../../Components/DualBarChart";
+import { selectBudget } from "../../features/budget/budgetSlice";
 
 const Dashboard: React.FC = () => {
   const incomeArray = useAppSelector(selectIncomeTransactions);
   const expenseArray = useAppSelector(selectExpenseTransactions);
   const expenseSum = useAppSelector(selectExpenseSum);
   const incomeSum = useAppSelector(selectIncomeSum);
+  const budget = useAppSelector(selectBudget)
 
   const transactionStatus = useAppSelector(selectStatus);
   const [filteredIncomeArray, setFilteredIncomeArray] = useState(incomeArray);
@@ -104,6 +107,8 @@ const Dashboard: React.FC = () => {
       filteredIncomeArray,
       filteredExpenseArray,
     );
+
+  const { categories, budgetedAmounts, spentAmounts } = processCategoryDataForDualBarChart(filteredExpenseArray, budget);
 
   if (
     transactionStatus === "idle" ||
@@ -177,8 +182,8 @@ const Dashboard: React.FC = () => {
             </Grid>
             <Grid item xs={12}>
               <Box sx={{ height: '100%' }}>
-                <Typography variant="h6">Income and Expense</Typography>
-                <DualLineChart dates={dates} IncomeArray={incomeAmounts} ExpenseArray={expenseAmounts} />
+                <Typography variant="h6">Budget and Expense</Typography>
+                <DualBarChart categories={categories} BudgetArray={budgetedAmounts} ExpenseArray={spentAmounts} />
               </Box>
             </Grid>
           </Grid>

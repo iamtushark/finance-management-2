@@ -3,7 +3,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 interface DualBarChartProps {
   BudgetArray: number[];
   ExpenseArray: number[];
-  dates: Array<Date>;
+  categories: Array<string>;
 }
 
 const highlightScope = {
@@ -11,11 +11,10 @@ const highlightScope = {
   faded: 'global',
 } as const;
 
-
 export default function DualBarChart({
   BudgetArray,
   ExpenseArray,
-  dates,
+  categories,
 }: DualBarChartProps) {
   return (
     <BarChart
@@ -30,7 +29,7 @@ export default function DualBarChart({
           data: ExpenseArray,
         },
       ].map((s) => ({ ...s, highlightScope }))}
-      xAxis={[{ scaleType: "band",data: dates.map(date => date.getDate()) }]}
+      xAxis={[{ scaleType: "band", data: categories }]}
       // sx={{
       //   '& .MuiBarElement-series-budget': {
       //     fill: '#4caf50',
