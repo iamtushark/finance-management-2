@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  Container,
   Grid,
   Button,
   Box,
   Typography,
-  useTheme
 } from "@mui/material";
 import PieChart from "../../Components/PieChart";
 import SummaryCard from "../../Components/SummaryCard";
@@ -20,7 +18,7 @@ import {
   selectIncomeTransactions,
   selectStatus,
 } from "../../features/transaction/transactionSlice";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DateRangePicker, SingleInputDateRangeField } from "@mui/x-date-pickers-pro";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Dayjs } from "dayjs";
@@ -43,7 +41,6 @@ import DualLineChart from "../../Components/DualLineChart";
 import DualBarChart from "../../Components/DualBarChart";
 
 const Dashboard: React.FC = () => {
-  const theme = useTheme();
   const incomeArray = useAppSelector(selectIncomeTransactions);
   const expenseArray = useAppSelector(selectExpenseTransactions);
   const expenseSum = useAppSelector(selectExpenseSum);
@@ -54,18 +51,14 @@ const Dashboard: React.FC = () => {
   const [filteredExpenseArray, setFilteredExpenseArray] = useState(expenseArray);
   const [filteredExpenseSum, setFilteredExpenseSum] = useState(expenseSum);
   const [filteredIncomeSum, setFilteredIncomeSum] = useState(incomeSum);
-  const [startDate, setStartDate] = useState<Dayjs | null>(null);
-  const [endDate, setEndDate] = useState<Dayjs | null>(null);
+  const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([null, null]);
 
-  const handleStartDateChange = (date: Dayjs | null) => {
-    setStartDate(date);
-  };
-
-  const handleEndDateChange = (date: Dayjs | null) => {
-    setEndDate(date);
+  const handleDateRangeChange = (newRange: [Dayjs | null, Dayjs | null]) => {
+    setDateRange(newRange);
   };
 
   useEffect(() => {
+    const [startDate, endDate] = dateRange;
     if (startDate && endDate) {
       setFilteredExpenseArray(
         getDateFilteredExpenseTransactions(
@@ -104,45 +97,7 @@ const Dashboard: React.FC = () => {
       setFilteredExpenseSum(expenseSum);
       setFilteredIncomeSum(incomeSum);
     }
-  }, [startDate, endDate, expenseArray, incomeArray, expenseSum, incomeSum]);
-
-  const handleSave = () => {
-    if (startDate && endDate) {
-      setFilteredExpenseArray(
-        getDateFilteredExpenseTransactions(
-          expenseArray,
-          startDate.toISOString(),
-          endDate.toISOString(),
-        ),
-      );
-      setFilteredIncomeArray(
-        getDateFilteredIncomeTransactions(
-          incomeArray,
-          startDate.toISOString(),
-          endDate.toISOString(),
-        ),
-      );
-      setFilteredExpenseSum(
-        getDateFilteredExpenseSum(
-          expenseArray,
-          startDate.toISOString(),
-          endDate.toISOString(),
-        ),
-      );
-      setFilteredIncomeSum(
-        getDateFilteredIncomeSum(
-          incomeArray,
-          startDate.toISOString(),
-          endDate.toISOString(),
-        ),
-      );
-      if (filteredExpenseArray.length === 0) {
-        toast.info("Add Expense/Income for graphical insights");
-      }
-    } else {
-      toast.warn("Set Appropriate Start and End dates");
-    }
-  };
+  }, [incomeSum, expenseSum, dateRange]);
 
   const { incomeAmounts, expenseAmounts, dates } =
     processTransactionsForDualLineChart(
@@ -170,44 +125,14 @@ const Dashboard: React.FC = () => {
     return (
       <>
         <CommonTopBar title="Overview" />
-        <CommonBox sx={{ flexDirection: 'column', padding: '2.4vw' }}>
+        <CommonBox sx={{ flexDirection: 'column', padding: '2.4vw', color: "black", backgroundColor: "#f9f9f9", }}>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Grid item xs={12} sm={6} md={4}>
-                <DatePicker
-                  label="Start Date"
-                  value={startDate}
-                  onChange={handleStartDateChange}
-                  sx={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <DatePicker
-                  label="End Date"
-                  value={endDate}
-                  onChange={handleEndDateChange}
-                  sx={{ width: "100%" }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={12} md={4} >
-                <Button
-                  variant="contained"
-                  onClick={handleSave}
-                  sx={{
-                    backgroundColor: "primary.main",
-                    height: 50,
-                    fontSize: "0.9rem",
-                    fontWeight: "600",
-                    borderRadius: "50px",
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "primary.dark",
-                    },
-                  }}
-                >
-                  Search
-                </Button>
-              </Grid>
+              <DateRangePicker
+                slots={{ field: SingleInputDateRangeField }}
+                value={dateRange}
+                onChange={handleDateRangeChange}
+              />
             </LocalizationProvider>
           </Grid>
 
