@@ -277,10 +277,11 @@ const Dashboard: React.FC = () => {
             <Grid
               container
               maxWidth={"100%"}
+              spacing={2}
               sx={{ marginTop: "2vh", padding: "0px" }}
             >
               {/* Summary Cards */}
-              <Grid item xs={12} sm={12} md={4} sx={{ m: "0px", p: "0px" }}>
+              <Grid item xs={12} sm={4} md={3} sx={{ m: "0px", p: "0px" }}>
                 <SummaryCard
                   title="Total Income"
                   value={String(filteredIncomeSum)}
@@ -291,7 +292,7 @@ const Dashboard: React.FC = () => {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={12} md={4} sx={{ m: "0px", p: "0px" }}>
+              <Grid item xs={12} sm={4} md={3} sx={{ m: "0px", p: "0px" }}>
                 <SummaryCard
                   title="Total Spent"
                   value={String(filteredExpenseSum)}
@@ -300,7 +301,7 @@ const Dashboard: React.FC = () => {
                   }
                 />
               </Grid>
-              <Grid item xs={12} sm={12} md={4} sx={{ m: "0px", p: "0px" }}>
+              <Grid item xs={12} sm={4} md={3} sx={{ m: "0px", p: "0px" }}>
                 <SummaryCard
                   title="Available Balance"
                   value={String(filteredIncomeSum - filteredExpenseSum)}

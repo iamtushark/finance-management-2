@@ -16,7 +16,10 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ title, value, icon }) => {
         my: 0,
         p: '1.6vw',
         marginRight: "8px",
-        // boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        // boxShadow: 4,
+        // elevation: 12,
+        
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.16)",
         borderRadius: "8px",
         // backgroundColor: "rgba(255, 255, 255, 0.3)",
         // backdropFilter: "blur(10px)",
