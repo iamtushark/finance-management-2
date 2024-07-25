@@ -25,7 +25,7 @@ const TransactionPage: React.FC = () => {
           style={{
             maxWidth: "94%",
             marginTop: "16px",
-            marginLeft: "72px",
+            marginLeft: "16px",
           }}
         >
           <CommonTableSection
