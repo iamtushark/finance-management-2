@@ -51,7 +51,7 @@ export default function DualLineChart({
         },
       }}
       width={500}
-      height={300}
+      height={400}
     />
   );
 }

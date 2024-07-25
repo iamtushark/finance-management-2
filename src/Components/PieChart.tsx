@@ -52,7 +52,7 @@ export default function PieActiveArc({ type, data }: PieChartProps) {
           faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
         },
       ]}
-      height={200}
+      height={400}
     />
   );
 }
