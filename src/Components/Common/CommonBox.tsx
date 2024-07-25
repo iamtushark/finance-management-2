@@ -8,10 +8,11 @@ const CommonBox: React.FC<CommonBoxProps> = ({ children, ...props }) => {
   return (
     <Box
       {...props}
-      padding={2}
       sx={{
-        minHeight: "90vh",
+        // minHeight: "90vh",
         // backgroundColor: "#f0f0f0",
+        margin: 0,
+        padding: 0,
         alignItems: "center",
         display: "flex",
         justifyContent: "center",

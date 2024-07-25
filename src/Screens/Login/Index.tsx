@@ -22,6 +22,7 @@ import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
 import { fontStyle } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import CommonTypography from "../../Components/Common/CommonTypography";
+import CommonBox from "../../Components/Common/CommonBox";
 
 const LoginPage: React.FC = () => {
   const {
@@ -51,51 +52,55 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <CommonFormBox>
+    <>
+    <CommonBox sx={{flexDirection:'column'}}>
       <CommonTypography variant="h3"
-        style={{marginBottom: '4vh'}
-        }>Fake.Expense.App</CommonTypography>
-      <CommonContainer>
-        <CommonCard>
-          <CommonCardContent>
-            <CommonHeadingTypography>Login</CommonHeadingTypography>
-            <Stack
-              component="form"
-              onSubmit={handleSubmit(onSubmit)}
-              sx={{ flexGrow: 1 }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <CommonTextField
-                    name="username"
-                    control={control}
-                    label="Username"
-                  />
+      sx={{margin: '4vh auto', fontWeight:700}
+          }>Fake.Expense.App</CommonTypography>
+      <CommonFormBox>
+        <CommonContainer>
+          <CommonCard>
+            <CommonCardContent>
+              <CommonHeadingTypography>Login</CommonHeadingTypography>
+              <Stack
+                component="form"
+                onSubmit={handleSubmit(onSubmit)}
+                sx={{ flexGrow: 1 }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <CommonTextField
+                      name="username"
+                      control={control}
+                      label="Username"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CommonTextField
+                      name="password"
+                      control={control}
+                      label="Password"
+                      type="password"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CardActions>
+                      <CommonBlackSubmitButton loading={false} text="Log In" />
+                    </CardActions>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <CommonTextField
-                    name="password"
-                    control={control}
-                    label="Password"
-                    type="password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <CardActions>
-                    <CommonBlackSubmitButton loading={false} text="Log In" />
-                  </CardActions>
-                </Grid>
-              </Grid>
-            </Stack>
-            {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
-            <p 
-              onClick={()=>navigateToSignup()} 
-              style={{cursor: 'pointer', color: 'blue', textDecoration: 'underline' }
-            }>Don't have an account? Sign up</p>
-          </CommonCardContent>
-        </CommonCard>
-      </CommonContainer>
-    </CommonFormBox>
+              </Stack>
+              {error && <CommonErrorTypography>{error}</CommonErrorTypography>}
+              <p 
+                onClick={()=>navigateToSignup()} 
+                style={{cursor: 'pointer', color: 'blue', textDecoration: 'underline' }
+              }>Don't have an account? Sign up</p>
+            </CommonCardContent>
+          </CommonCard>
+        </CommonContainer>
+      </CommonFormBox>
+    </CommonBox>
+    </>
   );
 };
 

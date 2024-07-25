@@ -22,6 +22,7 @@ import { addUser } from "../../dbOperations/operations";
 import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
 import CommonTypography from "../../Components/Common/CommonTypography";
+import CommonBox from "../../Components/Common/CommonBox";
 
 
 const SignupPage: React.FC = () => {
@@ -57,10 +58,11 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <CommonFormBox>
-      <CommonTypography variant="h3"
-        style={{marginBottom: '4vh'}
+    <CommonBox sx={{flexDirection: 'column'}}>
+    <CommonTypography variant="h3"
+    style={{margin: '4vh auto', fontWeight: 700}
         }>Fake.Expense.App</CommonTypography>
+    <CommonFormBox>
       <CommonContainer>
         <CommonCard>
           <CommonCardContent>
@@ -122,6 +124,7 @@ const SignupPage: React.FC = () => {
         </CommonCard>
       </CommonContainer>
     </CommonFormBox>
+    </CommonBox>
   );
 };
 
