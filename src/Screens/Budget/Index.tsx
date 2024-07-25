@@ -76,7 +76,7 @@ const BudgetPage: React.FC = () => {
   } else {
     return (
       <>
-        <CommonTopBar title="Overview" />
+        <CommonTopBar title="Budget" />
         <div
           style={{
             padding: 1,
