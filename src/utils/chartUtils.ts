@@ -128,3 +128,39 @@ export function processTransactionsForDualLineChart(
     expenseAmounts: expenseAmountsArray,
   };
 }
+
+interface CategoryData {
+  categories: string[];
+  budgetedAmounts: number[];
+  spentAmounts: number[];
+}
+
+export const processCategoryDataForDualBarChart = (
+  transactions: Transaction[],
+  budget: Budget
+): CategoryData => {
+  const categorySpendMap: { [category: string]: number } = {};
+
+  // Calculate total spent per category
+  transactions.forEach((transaction) => {
+    if (transaction.type === "Expense") {
+      if (!categorySpendMap[transaction.category]) {
+        categorySpendMap[transaction.category] = 0;
+      }
+      categorySpendMap[transaction.category] += transaction.amount;
+    }
+  });
+
+  // Generate the arrays for categories, budgeted amounts, and spent amounts
+  const categories: string[] = [];
+  const budgetedAmounts: number[] = [];
+  const spentAmounts: number[] = [];
+
+  Object.keys(budget).forEach((category) => {
+    categories.push(category);
+    budgetedAmounts.push(budget[category].amountSet);
+    spentAmounts.push(categorySpendMap[category] || 0);
+  });
+
+  return { categories, budgetedAmounts, spentAmounts };
+};
