@@ -180,26 +180,31 @@ const Dashboard: React.FC = () => {
     );
   } else {
     return (
-      <div>
-        {/* style={{overflow: 'hidden', maxWidth:'100%', maxHeight:'100%'}} */}
+      <>
         <CommonTopBar title="Overview" />
+      <CommonBox sx={{flexDirection: 'column'}}>
 
+        {/* style={{overflow: 'hidden', maxWidth:'100%', maxHeight:'100%'}} */}
+
+        
         {/* <Container sx={{ bgcolor: "white", border: '1px ', borderRadius: '16px', padding: '12px' }}> */}
         <div
           style={{
             padding: 1,
             marginLeft: "0px",
             paddingLeft: "0px",
-            backgroundColor: "#f9f9f9",
+            // backgroundColor: "#f9f9f9",
             width: "100%",
             // justifySelf: 'center',
           }}
         >
-          <div
+          <CommonBox>
+            <CommonBox sx={{flexDirection: 'column'}}>
+          {/* <div
             style={{
               maxWidth: "95%",
               marginTop: "16px",
-              marginLeft: "72px",
+              // marginLeft: "72px",
               // backgroundColor: "#f1f1f1f1",
               // marginBottom: '1.6rem',
               // padding: "0rem 1.6rem",
@@ -210,16 +215,16 @@ const Dashboard: React.FC = () => {
               // overflow: "hidden",
               // maxHeight: "5rem",
             }}
-          >
+          > */}
             <Grid
               container
               spacing={2}
-              // justifyContent="center"
-              // alignItems="center"
-              sx={{ minWidth: "100%", maxWidth: "100%" }}
+              justifyContent="center"
+              alignItems="center"
+              sx={{ minWidth: "100%", maxWidth: "100%" , }}
             >
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Grid item xs={10} sm={6} md={3}>
+                <Grid item xs={4} sm={4} md={5}>
                   <DatePicker
                     label="Start Date"
                     value={startDate}
@@ -227,7 +232,7 @@ const Dashboard: React.FC = () => {
                     sx={{ width: "100%" }}
                   />
                 </Grid>
-                <Grid item xs={10} sm={6} md={3}>
+                <Grid item xs={4} sm={4} md={5}>
                   <DatePicker
                     label="End Date"
                     value={endDate}
@@ -239,8 +244,8 @@ const Dashboard: React.FC = () => {
 
               <Grid
                 item
-                xs={10}
-                sm={6}
+                xs={4}
+                sm={2}
                 md={2}
                 // display="flex"
                 alignItems="center"
@@ -268,51 +273,57 @@ const Dashboard: React.FC = () => {
             </Grid>
 
             {/* <CommonTypography sx={{marginTop: '16px'}}>Summary</CommonTypography> */}
-            <h3 style={{ marginBottom: "0px", marginTop: "16px" }}>Summary</h3>
+            <h3 style={{ marginBottom: "0px", marginTop: "4vh" }}>Summary</h3>
             <Grid
               container
               maxWidth={"100%"}
-              sx={{ margin: "0px", padding: "0px" }}
+              sx={{ marginTop: "2vh", padding: "0px" }}
             >
               {/* Summary Cards */}
-              <SummaryCard
-                title="Total Income"
-                value={String(filteredIncomeSum)}
-                icon={
-                  <AttachMoneyIcon
-                    sx={{ fontSize: 30, color: "primary.main" }}
-                  />
-                }
-              />
-              <SummaryCard
-                title="Total Spent"
-                value={String(filteredExpenseSum)}
-                icon={
-                  <SavingsIcon sx={{ fontSize: 30, color: "success.main" }} />
-                }
-              />
-              <SummaryCard
-                title="Available Balance"
-                value={String(filteredIncomeSum - filteredExpenseSum)}
-                icon={
-                  <AccountBalance
-                    sx={{ fontSize: 30, color: "success.main" }}
-                  />
-                }
-              />
+              <Grid item xs={12} sm={12} md={4} sx={{ m: "0px", p: "0px" }}>
+                <SummaryCard
+                  title="Total Income"
+                  value={String(filteredIncomeSum)}
+                  icon={
+                    <AttachMoneyIcon
+                      sx={{ fontSize: 30, color: "primary.main" }}
+                    />
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={4} sx={{ m: "0px", p: "0px" }}>
+                <SummaryCard
+                  title="Total Spent"
+                  value={String(filteredExpenseSum)}
+                  icon={
+                    <SavingsIcon sx={{ fontSize: 30, color: "success.main" }} />
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12} md={4} sx={{ m: "0px", p: "0px" }}>
+                <SummaryCard
+                  title="Available Balance"
+                  value={String(filteredIncomeSum - filteredExpenseSum)}
+                  icon={
+                    <AccountBalance
+                      sx={{ fontSize: 30, color: "success.main" }}
+                    />
+                  }
+                />
+              </Grid>
             </Grid>
 
             {/* <CommonTypography sx={{marginTop: '16px'}}>Reports</CommonTypography> */}
-            <h3 style={{ marginTop: "16px" }}>Reports</h3>
+            <h3 style={{ marginTop: "4vh" }}>Reports</h3>
             {/* Pie Charts */}
             <Grid
               container
               // spacing={2}
               // justifyContent="center"
-              sx={{ m: "0px", p: "0px", marginTop: "2px", maxWidth: "95%" }}
+              sx={{ m: "0px", p: "0px", marginTop: "0.4vh" }}
             >
-              <Grid item xs={12} sm={12} md={3} sx={{ m: "0px", p: "0px" }}>
-                <CommonCard sx={{ mx: "4px" }}>
+              <Grid item xs={12} sm={12} md={4} sx={{ m: "0px", p: "0px" }}>
+                <CommonCard sx={{ mr: "0.8vw" }}>
                   <h3>Expenses</h3>
                   <PieChart
                     type="expense"
@@ -320,8 +331,8 @@ const Dashboard: React.FC = () => {
                   />
                 </CommonCard>
               </Grid>
-              <Grid item xs={12} sm={12} md={3}>
-                <CommonCard sx={{ mx: "4px" }}>
+              <Grid item xs={12} sm={12} md={4}>
+                <CommonCard sx={{ mr:'0.8vw' }}>
                   <h3>Income</h3>
                   <PieChart
                     type="income"
@@ -329,8 +340,8 @@ const Dashboard: React.FC = () => {
                   />
                 </CommonCard>
               </Grid>
-              <Grid item xs={12} sm={12} md={6}>
-                <CommonCard sx={{ maxHeight: "63%", marginX: "4px" }}>
+              <Grid item xs={12} sm={12} md={4}>
+                <CommonCard sx={{ maxHeight: "63%", margin: 0 }}>
                   <h3>Income and Expense</h3>
                   <DualLineChart
                     dates={dates}
@@ -340,9 +351,11 @@ const Dashboard: React.FC = () => {
                 </CommonCard>
               </Grid>
             </Grid>
-          </div>
+          </CommonBox>
+        </CommonBox>
         </div>
-      </div>
+      </CommonBox>
+      </>
     );
   }
 };
