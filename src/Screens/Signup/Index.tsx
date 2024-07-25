@@ -23,6 +23,7 @@ import { localStorageKeys } from "../../dbOperations/config";
 import useNavigateAfterLogin from "../../hooks/useNavigateAfterLogin";
 import CommonTypography from "../../Components/Common/CommonTypography";
 import CommonBox from "../../Components/Common/CommonBox";
+import CommonFooter from "../../Components/Common/CommonFooter";
 
 
 const SignupPage: React.FC = () => {
@@ -58,7 +59,8 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <CommonBox sx={{flexDirection: 'column'}}>
+    <>
+    <CommonBox sx={{flexDirection: 'column', backgroundImage: '../../utils/bg.jpg'}}>
     <CommonTypography variant="h3"
     style={{margin: '4vh auto', fontWeight: 700}
         }>Fake.Expense.App</CommonTypography>
@@ -126,7 +128,10 @@ const SignupPage: React.FC = () => {
         </CommonCard>
       </CommonContainer>
     </CommonFormBox>
+    {/* <CommonFooter/> */}
     </CommonBox>
+    </>
+
   );
 };
 

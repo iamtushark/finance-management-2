@@ -23,6 +23,7 @@ import { fontStyle } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import CommonTypography from "../../Components/Common/CommonTypography";
 import CommonBox from "../../Components/Common/CommonBox";
+import CommonFooter from "../../Components/Common/CommonFooter";
 
 const LoginPage: React.FC = () => {
   const {
@@ -102,6 +103,7 @@ const LoginPage: React.FC = () => {
         </CommonContainer>
       </CommonFormBox>
     </CommonBox>
+    {/* <CommonFooter/> */}
     </>
   );
 };
