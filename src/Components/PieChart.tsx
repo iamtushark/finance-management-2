@@ -1,4 +1,6 @@
 import { PieChart } from "@mui/x-charts";
+import { useTheme, useMediaQuery } from "@mui/material";
+
 
 // Data format to be sent as prop
 // const data = [
@@ -41,6 +43,10 @@ interface PieChartProps {
 }
 
 export default function PieActiveArc({ type, data }: PieChartProps) {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
     <PieChart
       colors={type === "income" ? incomeGraphColors : expenseGraphColors}
@@ -51,7 +57,20 @@ export default function PieActiveArc({ type, data }: PieChartProps) {
           highlightScope: { faded: "global", highlighted: "item" },
           faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
         },
+        
       ]}
+      sx={{
+        "& .MuiPieChart-root": {
+          flexDirection: isSmallScreen ? "column" : "row",
+          justifyContent: "center",
+          alignItems: isSmallScreen ? "center" : "flex-start",
+        },
+        "& .MuiPieChart-legend": {
+          marginTop: isSmallScreen ? "16px" : "0",
+          marginLeft: isLargeScreen ? "16px" : "0",
+          textAlign: "center",
+        },
+      }}
       height={400}
     />
   );
