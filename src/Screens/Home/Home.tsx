@@ -3,6 +3,7 @@ import Header from "./Header";
 import HeroSection from "./HeroSection";
 import FeatureList from "./FeatureList";
 import FeaturesSection from "./FeaturesSection";
+import CommonFooter from "../../Components/Common/CommonFooter";
 
 const HomePage: React.FC = () => (
   <div>
@@ -10,6 +11,7 @@ const HomePage: React.FC = () => (
     <HeroSection />
     <FeatureList />
     <FeaturesSection />
+    <CommonFooter/>
   </div>
 );
 
