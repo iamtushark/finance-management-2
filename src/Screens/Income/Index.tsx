@@ -52,12 +52,26 @@ const Incomes: React.FC = () => {
             marginLeft: "72px",
           }}
         >
+          <Box component="h3" sx={{ mx: 0 }}>
+            Summary
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
           <SummaryCard
             value={String(sum)}
             title="Income"
             icon={<AccountBalance sx={{ fontSize: 30, color: "inherit" }} />}
           />
-          <CommonTableSection transactions={incomes} type={"Income"} />
+          </Box>
+          <Box component="h3" sx={{ mx: 0, marginTop: 2 }}>
+            Reports
+          </Box>
+          
           <CommonCard>
             <SingleLineChart data={amounts} label="Income" dates={dates} />
           </CommonCard>
