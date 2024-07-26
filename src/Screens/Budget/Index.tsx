@@ -90,7 +90,7 @@ const BudgetPage: React.FC = () => {
             style={{
               maxWidth: "94%",
               marginTop: "16px",
-              marginLeft: "72px",
+              marginLeft: "16px",
             }}
           >
             <h3>Summary</h3>
@@ -124,9 +124,9 @@ const BudgetPage: React.FC = () => {
             </Grid>
             <h3>Reports</h3>
             {/* <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}> */}
-            <CommonCard sx={{ display: "flex", ml: "0px" }}>
+            {/* <CommonCard sx={{ display: "flex", ml: "0px" }}> */}
               <PieActiveArc data={budgetGraphData} type={"expense"} />
-            </CommonCard>
+            {/* </CommonCard> */}
             {/* </Stack> */}
             <Grid container spacing={4} sx={{ mt: 4 }}>
               <Grid item xs={12}>

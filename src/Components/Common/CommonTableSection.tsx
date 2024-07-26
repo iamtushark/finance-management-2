@@ -10,17 +10,12 @@ import {
   IconButton,
 } from "@mui/material";
 import { Add as AddIcon, Edit as EditIcon } from "@mui/icons-material";
-import { useSelector } from "react-redux";
-import {
-  editTransaction,
-  selectTransactions,
-} from "../../features/transaction/transactionSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { editTransaction, selectTransactions } from "../../features/transaction/transactionSlice";
 import { Transaction, TransactionType } from "../../dbOperations/interfaces";
 import EditTransactionDialog from "../EditTransaction";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectLoggedInUser } from "../../features/user/userSlice";
 import { toast } from "react-toastify";
-import { BooleanSchema } from "yup";
 
 interface CommonTableSectionProps {
   transactions: Transaction[];
@@ -36,8 +31,7 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({
   type,
 }) => {
   const [open, setOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] =
-    useState<Transaction | null>(null);
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectLoggedInUser);
 
@@ -70,33 +64,55 @@ const CommonTableSection: React.FC<CommonTableSectionProps> = ({
       <TableContainer
         component={Paper}
         sx={{
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          borderRadius: "8px",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          borderRadius: "20px",
           overflow: "hidden",
-          backgroundColor: "white",
+          backgroundColor: "#f5f5f5",
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+          },
         }}
       >
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Category</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Date</TableCell>
-              {!!showType && <TableCell>Type</TableCell>}
-              {!!showEditButton && <TableCell>Edit</TableCell>}
+              <TableCell sx={{ fontWeight: 600 }}>Category</TableCell>
+              <TableCell sx={{ fontWeight: 600 }}>Amount</TableCell>
+              <TableCell sx={{ fontWeight: 600 }}>Date</TableCell>
+              {!!showType && <TableCell sx={{ fontWeight: 600 }}>Type</TableCell>}
+              {!!showEditButton && <TableCell sx={{ fontWeight: 600 }}>Edit</TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
             {transactions.length > 0 ? (
               transactions.map(trxn => (
-                <TableRow key={trxn.id}>
+                <TableRow
+                  key={trxn.id}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#e0f7fa",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
                   <TableCell>{trxn.category}</TableCell>
-                  <TableCell>{trxn.amount}</TableCell>
+                  <TableCell>₹{trxn.amount}</TableCell>
                   <TableCell>{new Date(trxn.date).toDateString()}</TableCell>
                   {!!showType && <TableCell>{trxn.type}</TableCell>}
                   {!!showEditButton && (
                     <TableCell sx={{ width: 10, maxHeight: 20 }}>
-                      <IconButton onClick={() => handleEditClick(trxn)}>
+                      <IconButton
+                        onClick={() => handleEditClick(trxn)}
+                        sx={{
+                          padding: 0,
+                          transition: "color 0.3s ease",
+                          "&:hover": {
+                            color: "#1976d2", // You can customize the color as needed
+                          },
+                        }}
+                      >
                         <EditIcon />
                       </IconButton>
                     </TableCell>
@@ -130,6 +146,12 @@ const AddButton = () => (
   <IconButton
     color="primary"
     style={{ position: "fixed", bottom: 16, right: 16 }}
+    sx={{
+      transition: "background-color 0.3s ease",
+      "&:hover": {
+        backgroundColor: "#1976d2", // Customize the background color on hover
+      },
+    }}
   >
     <AddIcon fontSize="large" />
   </IconButton>
