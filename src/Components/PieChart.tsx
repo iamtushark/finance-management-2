@@ -1,13 +1,6 @@
+import React from "react";
 import { PieChart } from "@mui/x-charts";
-import { useTheme, useMediaQuery } from "@mui/material";
-
-
-// Data format to be sent as prop
-// const data = [
-// 	{ value: 10, label: 'series A' },
-// 	{ value: 15, label: 'series B' },
-// 	{ value: 20, label: 'series C' },
-// ];
+import { Box } from "@mui/material";
 
 const expenseGraphColors = [
   "#FF0000", // Red
@@ -43,35 +36,53 @@ interface PieChartProps {
 }
 
 export default function PieActiveArc({ type, data }: PieChartProps) {
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const colors = type === "income" ? incomeGraphColors : expenseGraphColors;
 
   return (
-    <PieChart
-      colors={type === "income" ? incomeGraphColors : expenseGraphColors}
-      series={[
-        {
-          data,
-          cornerRadius: 4,
-          highlightScope: { faded: "global", highlighted: "item" },
-          faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
-        },
-        
-      ]}
+    <Box
       sx={{
-        "& .MuiPieChart-root": {
-          flexDirection: isSmallScreen ? "column" : "row",
-          justifyContent: "center",
-          alignItems: isSmallScreen ? "center" : "flex-start",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "75%",
+        height: "75%",
+        backgroundColor: "#f5f5f5",
+        borderRadius: "20px",
+        border: "1px solid #e0e0e0",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
         },
-        "& .MuiPieChart-legend": {
-          marginTop: isSmallScreen ? "16px" : "0",
-          marginLeft: isLargeScreen ? "16px" : "0",
-          textAlign: "center",
-        },
+        overflow: "visible", // Ensure overflow is handled correctly
       }}
-      height={400}
-    />
+    >
+      <PieChart
+        colors={colors}
+        series={[
+          {
+            data,
+            cornerRadius: 4,
+            highlightScope: { faded: "global", highlighted: "item" },
+            faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
+          },
+        ]}
+        sx={{
+          "& .MuiPieChart-root": {
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+          "& .MuiPieChart-legend": {
+            marginTop: "16px",
+            textAlign: "center",
+          },
+        }}
+        height={300}
+      />
+    </Box>
   );
 }

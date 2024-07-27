@@ -1,5 +1,9 @@
 import React from "react";
-import { Card, CardContent, Typography, Stack, Box } from "@mui/material";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
 
 interface SummaryCardProps {
   title: string;
@@ -11,51 +15,51 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ title, value, icon }) => {
   return (
     <Card
       sx={{
-        // width: 250,
-        mx: 0,
-        my: 0,
-        p: '1.6vw',
-        marginRight: "8px",
-        // boxShadow: 4,
-        // elevation: 12,
-        
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.16)",
-        borderRadius: "8px",
-        // backgroundColor: "rgba(255, 255, 255, 0.3)",
-        // backdropFilter: "blur(10px)",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "16px",
+        borderRadius: "12px",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        border: "1px solid #e0e0e0",
+        width: 300,
+        backgroundColor: "#f5f5f5",
+        transition: "transform 0.3s ease, box-shadow 0.3s ease",
+        "&:hover": {
+          transform: "translateY(-4px)",
+          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+        },
       }}
     >
-      <CardContent
-        sx={{ display: "flex", flexDirection: "column", p: 0.3, pb: 0, mb: 0 }}
-      >
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ width: "100%" }}
-        >
+      <Box sx={{ display: "flex", flexDirection: "column", flex: "1 0 auto" }}>
+        <CardContent sx={{ padding: 0 }}>
           <Typography
             variant="subtitle2"
-            component="div"
-            sx={{ fontWeight: "bold" }}
+            color="textSecondary"
+            sx={{ fontWeight: 500, letterSpacing: "0.05em", textTransform: "uppercase" }}
           >
             {title}
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center" }}>{icon}</Box>
-        </Stack>
-        <Typography
-          variant="h5"
-          component="div"
-          sx={{ mt: 1, mb: 0, pb: 0, color: "#333" }}
-        >
-          {`₹${value}`}
-        </Typography>
-      </CardContent>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{ fontWeight: 700, color: "#fffff", marginTop: "8px" }}
+          >
+            ₹{value}
+          </Typography>
+        </CardContent>
+      </Box>
+      <IconButton sx={{ padding: 0 }}>
+        {icon}
+      </IconButton>
     </Card>
   );
 };
 
 export default SummaryCard;
+
+
 
 // import React from 'react';
 // import { Card, CardContent, Typography, Stack } from '@mui/material';

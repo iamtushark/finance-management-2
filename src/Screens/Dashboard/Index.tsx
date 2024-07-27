@@ -142,7 +142,7 @@ const Dashboard: React.FC = () => {
           </Grid>
 
           <Typography variant="h5" sx={{ marginY: "4vh" }}>Summary</Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={32}>
             <Grid item xs={12} sm={4} md={3}>
               <SummaryCard
                 title="Total Income"
