@@ -49,7 +49,7 @@ const Incomes: React.FC = () => {
           style={{
             maxWidth: "94%",
             marginTop: "16px",
-            marginLeft: "72px",
+            marginLeft: "16px",
           }}
         >
           <Box component="h3" sx={{ mx: 0 }}>
@@ -75,7 +75,9 @@ const Incomes: React.FC = () => {
           <CommonCard>
             <SingleLineChart data={amounts} label="Income" dates={dates} />
           </CommonCard>
-          <CommonTableSection transactions={incomes} type={"Income"} />
+          <Box sx={{ mt: 2 }}>
+            <CommonTableSection transactions={incomes} type={"Income"} />
+          </Box>
           <AddButton onClick={handleDialogOpen} />
           <AddIncomeDialog open={dialogOpen} onClose={handleDialogClose} />
         </div>
