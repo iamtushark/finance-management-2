@@ -22,9 +22,9 @@ const expenseGraphColors = [
 
 const incomeGraphColors = [
   "#008000", // Green
-  "#00FF00", // Lime
   "#9ACD32", // Yellow Green
   "#3CB371", // Medium Sea Green
+  "#00FF00", // Lime
   "#2E8B57", // Sea Green
   "#006400", // Dark Green
   "#32CD32", // Lime Green
