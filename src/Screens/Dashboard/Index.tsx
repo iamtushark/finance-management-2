@@ -18,9 +18,7 @@ import {
   selectIncomeTransactions,
   selectStatus,
 } from "../../features/transaction/transactionSlice";
-import { DateRangePicker, SingleInputDateRangeField } from "@mui/x-date-pickers-pro";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import { Dayjs } from "dayjs";
 import {
   getDateFilteredExpenseSum,
@@ -54,8 +52,8 @@ const Dashboard: React.FC = () => {
   const [filteredExpenseArray, setFilteredExpenseArray] = useState(expenseArray);
   const [filteredExpenseSum, setFilteredExpenseSum] = useState(expenseSum);
   const [filteredIncomeSum, setFilteredIncomeSum] = useState(incomeSum);
-  const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([null, null]);
 
+  const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null]>([null, null]);
   const handleDateRangeChange = (newRange: [Dayjs | null, Dayjs | null]) => {
     setDateRange(newRange);
   };
@@ -132,17 +130,11 @@ const Dashboard: React.FC = () => {
         <CommonTopBar title="Overview" />
         <CommonBox sx={{ flexDirection: 'column', padding: '2.4vw', color: "black", backgroundColor: "#f9f9f9", }}>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DateRangePicker
-                slots={{ field: SingleInputDateRangeField }}
-                value={dateRange}
-                onChange={handleDateRangeChange}
-              />
-            </LocalizationProvider>
+
           </Grid>
 
           <Typography variant="h5" sx={{ marginY: "4vh" }}>Summary</Typography>
-          <Grid container spacing={32}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4} md={3}>
               <SummaryCard
                 title="Total Income"
@@ -167,22 +159,22 @@ const Dashboard: React.FC = () => {
           </Grid>
 
           <Typography variant="h5" sx={{ marginY: "4vh" }}>Reports</Typography>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={6}>
               <Box sx={{ height: '100%' }}>
-                <Typography variant="h6">Expenses</Typography>
+                <Typography variant="h6" sx={{marginBottom: 4}}>Expenses</Typography>
                 <PieChart type="expense" data={groupAndSumByCategory(filteredExpenseArray)} />
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
               <Box sx={{ height: '100%' }}>
-                <Typography variant="h6">Income</Typography>
+                <Typography variant="h6" sx={{marginBottom: 4}}>Income</Typography>
                 <PieChart type="income" data={groupAndSumByCategory(filteredIncomeArray)} />
               </Box>
             </Grid>
             <Grid item xs={12}>
               <Box sx={{ height: '100%' }}>
-                <Typography variant="h6">Budget and Expense</Typography>
+                <Typography variant="h6" sx={{marginBottom: 4}}>Budget and Expense</Typography>
                 <DualBarChart categories={categories} BudgetArray={budgetedAmounts} ExpenseArray={spentAmounts} />
               </Box>
             </Grid>
