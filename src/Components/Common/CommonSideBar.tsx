@@ -14,6 +14,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ContactlessIcon from "@mui/icons-material/Contactless";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../../features/user/userSlice";
 
 const drawerWidth = 240;
 interface MiniDrawerProps {
@@ -101,16 +102,16 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ open, onClose }) => {
         </ListItem>
       </List>
       <List sx={{ marginTop: "auto" }}>
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton sx={{ margin: "8px 0" }} onClick={() => navigate("/")}>
             <ListItemIcon>
               <AccountBoxIcon sx={{ color: "#ffffff", fontSize: "24px" }} />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate("/logout")}>
+          <ListItemButton onClick={() => {logoutUser(); navigate("/")}}>
             <ListItemIcon>
               <LogoutIcon sx={{ color: "#ffffff", fontSize: "24px" }} />
             </ListItemIcon>
