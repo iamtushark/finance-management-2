@@ -140,29 +140,24 @@ const Dashboard: React.FC = () => {
           </Grid>
 
           <Typography variant="h5" sx={{ marginY: "4vh", fontWeight: "600" }}>Summary</Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={4} md={4}>
+          <Box sx={{display:"flex"}}>
+
               <SummaryCard
                 title="Total Income"
                 value={String(filteredIncomeSum)}
                 icon={<CreditScoreIcon sx={{ fontSize: 30, color: "primary.main" }} />}
               />
-            </Grid>
-            <Grid item xs={12} sm={4} md={4}>
               <SummaryCard
                 title="Total Spent"
                 value={String(filteredExpenseSum)}
                 icon={<StoreIcon sx={{ fontSize: 30, color: "#BA0021"}} />}
               />
-            </Grid>
-            <Grid item xs={12} sm={4} md={4}>
               <SummaryCard
                 title="Available Balance"
                 value={String(filteredIncomeSum - filteredExpenseSum)}
                 icon={<AccountBalanceWalletIcon sx={{ fontSize: 30, color: "primary.main" }} />}
               />
-            </Grid>
-          </Grid>
+          </Box>
           
           <Typography variant="h5" sx={{ marginY: "4vh", fontWeight: "600" }}>Reports</Typography>
 
