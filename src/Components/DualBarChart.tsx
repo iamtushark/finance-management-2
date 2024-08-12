@@ -1,7 +1,8 @@
-import { Box } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import { BarChart } from '@mui/x-charts/BarChart';
 
 interface DualBarChartProps {
+  title: string,
   BudgetArray: number[];
   ExpenseArray: number[];
   categories: Array<string>;
@@ -13,6 +14,7 @@ const highlightScope = {
 } as const;
 
 export default function DualBarChart({
+  title,
   BudgetArray,
   ExpenseArray,
   categories,
@@ -40,6 +42,16 @@ export default function DualBarChart({
         overflow: "visible", // Ensure overflow is handled correctly
       }}
     >
+        <Divider flexItem textAlign="left" sx={{ padding: 0, margin: 0, marginBottom: 2 }}>
+        {/* <Typography variant="h6" sx={{color: "#000000", opacity: 0.6,}}> */}
+        <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            sx={{ fontWeight: 400, letterSpacing: "0.05em", textTransform: "uppercase" }}
+          >
+          {title}
+          </Typography>
+      </Divider>
     <BarChart
       height={500}
       series={[

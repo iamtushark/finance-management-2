@@ -1,6 +1,6 @@
 import React from "react";
 import { PieChart } from "@mui/x-charts";
-import { Box } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 
 const expenseGraphColors = [
   "#FF0000", // Red
@@ -31,11 +31,12 @@ const incomeGraphColors = [
 ];
 
 interface PieChartProps {
+  title: string;
   type: "income" | "expense";
   data: Array<{ value: number; label: string }>;
 }
 
-export default function PieActiveArc({ type, data }: PieChartProps) {
+export default function PieActiveArc({ title, type, data }: PieChartProps) {
   const colors = type === "income" ? incomeGraphColors : expenseGraphColors;
 
   return (
@@ -50,7 +51,10 @@ export default function PieActiveArc({ type, data }: PieChartProps) {
         // height: "95%",
         backgroundColor: "#f5f5f5",
         borderRadius: "20px",
+        // borderTopRightRadius: 0,
+        // borderTopLeftRadius: 0,
         border: "1px solid #e0e0e0",
+        // borderTop: "white",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
@@ -60,6 +64,15 @@ export default function PieActiveArc({ type, data }: PieChartProps) {
         overflow: "visible", // Ensure overflow is handled correctly
       }}
     >
+      <Divider flexItem textAlign="left" sx={{ padding: 0, margin: 0 }}>
+        {/* <Typography variant="h6" sx={{color: "#000000", opacity: 0.6,}}> */}
+        <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            sx={{ fontWeight: 400, letterSpacing: "0.05em", textTransform: "uppercase" }}
+          >
+          {title}</Typography>
+      </Divider>
       <PieChart
         colors={colors}
         series={[

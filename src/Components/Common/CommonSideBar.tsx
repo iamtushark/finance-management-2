@@ -37,7 +37,8 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ open, onClose }) => {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-          backgroundColor: "#111827",
+          // backgroundColor: "#111827",
+          backgroundColor: "#000000",
           color: "#ffffff",
           display: "flex",
           flexDirection: "column",
@@ -52,7 +53,8 @@ const MiniDrawer: React.FC<MiniDrawerProps> = ({ open, onClose }) => {
           alignItems: "center",
           justifyContent: "center",
           padding: "8px",
-          backgroundColor: "#111827",
+          // backgroundColor: "#111827",
+          backgroundColor: "#000000",
           color: "#ffffff",
           cursor: "pointer",
         }}
