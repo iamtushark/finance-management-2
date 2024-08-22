@@ -49,17 +49,19 @@ export default function PieActiveArc({ title, type, data }: PieChartProps) {
         padding: 4,
         // width: "95%",
         // height: "95%",
-        backgroundColor: "#f5f5f5",
-        borderRadius: "20px",
+        backgroundColor: "#fff",
+        borderRadius: "4px",
         // borderTopRightRadius: 0,
         // borderTopLeftRadius: 0,
         border: "1px solid #e0e0e0",
         // borderTop: "white",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0 0px 32px 0px rgba(0, 0, 0, 0.01)",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+          // boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+          boxShadow: "2px 2px 8px 0.1px rgba(0, 0, 0, 0.1)",
         },
         overflow: "visible", // Ensure overflow is handled correctly
       }}

@@ -134,13 +134,13 @@ const Dashboard: React.FC = () => {
     return (
       <>
         <CommonTopBar title="Overview" />
-        <CommonBox sx={{ margin: 0, flexDirection: 'column', padding: '2.2vw', paddingTop: 2, color: "black", backgroundColor: "#f9f9f9", alignItems: "left"}}>
+        <CommonBox sx={{ margin: 0, flexDirection: 'column', padding: '2.2vw', paddingTop: 2, color: "black", alignItems: "left"}}>
           <Grid container spacing={2} justifyContent="center" alignItems="center">
 
           </Grid>
 
           <Typography variant="h5" sx={{ marginY: "4vh", fontWeight: "600" }}>Summary</Typography>
-          <Box sx={{display:"flex"}}>
+          <Box sx={{display:"flex", flexWrap:"wrap"}}>
 
               <SummaryCard
                 title="Total Income"

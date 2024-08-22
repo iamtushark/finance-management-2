@@ -82,7 +82,6 @@ const BudgetPage: React.FC = () => {
             padding: 1,
             marginLeft: "0px",
             paddingLeft: "0px",
-            backgroundColor: "#f9f9f9",
             width: "100%",
           }}
         >
@@ -125,7 +124,7 @@ const BudgetPage: React.FC = () => {
             <h3>Reports</h3>
             {/* <Stack sx={{ border: '1px solid #ccc', borderRadius: '8px', padding: '16px', margin: '16px' }}> */}
             {/* <CommonCard sx={{ display: "flex", ml: "0px" }}> */}
-              <PieActiveArc data={budgetGraphData} type={"expense"} />
+              <PieActiveArc title="report" data={budgetGraphData} type={"expense"} />
             {/* </CommonCard> */}
             {/* </Stack> */}
             <Grid container spacing={4} sx={{ mt: 4 }}>
@@ -140,7 +139,17 @@ const BudgetPage: React.FC = () => {
                       backgroundColor: "white",
                     }}
                   >
-                    <Table>
+                    <Table sx={{
+                      backgroundColor: "#ffffff",
+                      boxShadow: "0 0px 32px 0px rgba(0, 0, 0, 0.01)",
+                      border: "1px solid #e0e0e0",
+                      // backgroundColor: "#f5f5f5",
+                      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                      "&:hover": {
+                        transform: "translateY(-4px)",
+                        boxShadow: "2px 2px 8px 0.1px rgba(0, 0, 0, 0.1)",
+                      },
+                    }}>
                       <TableHead>
                         <TableRow>
                           <TableCell sx={{ fontWeight: "bold" }}>
@@ -159,7 +168,18 @@ const BudgetPage: React.FC = () => {
                           ([category, details]) => (
                             <TableRow
                               key={category}
-                              sx={{ backgroundColor: "#ffffff" }}
+                              sx={{ 
+                                backgroundColor: "#ffffff",
+                                boxShadow: "0 0px 32px 0px rgba(0, 0, 0, 0.01)",
+                                border: "1px solid #e0e0e0",
+                                width: 300,
+                                // backgroundColor: "#f5f5f5",
+                                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                                "&:hover": {
+                                  transform: "translateY(-4px)",
+                                  boxShadow: "2px 2px 8px 0.1px rgba(0, 0, 0, 0.1)",
+                                },
+                               }}
                             >
                               <TableCell component="th" scope="row">
                                 {category}
