@@ -33,14 +33,17 @@ const CommonTopBar: React.FC<TopBarProps> = (props: TopBarProps) => {
     <>
       <Box
         sx={{
-          position: "sticky",
-          bgcolor: "#111827",
+          position: "fixed",
+          // bgcolor: "#111827",
+          width: "100%",
+          bgcolor: "#000000",
           color: "white",
           height: "10vh",
           display: "flex",
           alignItems: "center",
           paddingLeft: 2,
           paddingRight: 2,
+          zIndex: 99,
         }}
       >
         <IconButton
@@ -68,6 +71,19 @@ const CommonTopBar: React.FC<TopBarProps> = (props: TopBarProps) => {
 
         </LocalizationProvider>
       </Box>
+      <Box
+        sx={{
+          // position: "fixed",
+          // bgcolor: "#111827",
+          bgcolor: "#000000",
+          color: "white",
+          height: "10vh",
+          display: "flex",
+          alignItems: "center",
+          paddingLeft: 2,
+          paddingRight: 2,
+        }}
+      ></Box>
       <MiniDrawer open={drawerOpen} onClose={handleDrawerToggle} />
     </>
   );

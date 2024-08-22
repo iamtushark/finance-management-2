@@ -41,15 +41,15 @@ export default function SingleLineChart({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#f5f5f5",
+        // backgroundColor: "#f5f5f5",
         borderRadius: "20px",
         border: "1px solid #e0e0e0",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        // boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         transition: "transform 0.3s ease, box-shadow 0.3s ease",
-        "&:hover": {
-          transform: "translateY(-4px)",
-          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-        },
+        // "&:hover": {
+        //   transform: "translateY(-4px)",
+        //   boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+        // },
         [`& .${lineElementClasses.root}`]: {
           strokeWidth: 2,
         },
