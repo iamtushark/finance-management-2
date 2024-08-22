@@ -41,7 +41,6 @@ const Incomes: React.FC = () => {
           padding: 1,
           marginLeft: "0px",
           paddingLeft: "0px",
-          backgroundColor: "#f9f9f9",
           width: "100%",
         }}
       >
